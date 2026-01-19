@@ -1,0 +1,41 @@
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">Settings</h1>
+
+  <%= form_with model: @user, url: settings_path, method: :patch, class: "bg-white rounded-lg shadow-md p-8" do |form| %>
+    <% if @user.errors.any? %>
+      <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <ul class="list-disc list-inside text-red-600">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-6">
+      <%= form.label :timezone, class: "block text-gray-700 font-medium mb-2" %>
+      <%= form.time_zone_select :timezone, ActiveSupport::TimeZone.all, { default: @user.timezone }, { class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" } %>
+      <p class="mt-1 text-sm text-gray-500">Your timezone affects when "today" is calculated for habits</p>
+    </div>
+
+    <div class="mb-6">
+      <div class="flex items-center mb-2">
+        <%= form.check_box :weekly_summary_enabled, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+        <%= form.label :weekly_summary_enabled, "Enable weekly summary emails", class: "ml-2 text-gray-700 font-medium" %>
+      </div>
+      <p class="ml-6 text-sm text-gray-500">Receive a weekly summary of your progress every Monday</p>
+    </div>
+
+    <div class="mb-6">
+      <div class="flex items-center mb-2">
+        <%= form.check_box :reminders_enabled, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+        <%= form.label :reminders_enabled, "Enable daily reminder emails", class: "ml-2 text-gray-700 font-medium" %>
+      </div>
+      <p class="ml-6 text-sm text-gray-500">Receive a reminder if you haven't checked in today</p>
+    </div>
+
+    <div class="flex items-center justify-end">
+      <%= form.submit "Save Settings", class: "bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+  <% end %>
+</div>

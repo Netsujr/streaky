@@ -1,0 +1,20 @@
+Your Weekly Summary
+
+Hi <%= @user.name %>, here's your habit progress for the week of <%= @week_start.strftime("%B %d") %> - <%= @week_end.strftime("%B %d") %>:
+
+<% @habits.each do |habit_data| %>
+<%= habit_data[:habit].name %>
+
+  Current Streak: <%= habit_data[:current_streak_days] %> days
+  Longest Streak: <%= habit_data[:longest_streak_days] %> days
+  This Week: <%= habit_data[:checkins_count] %> / <%= habit_data[:habit].goal_per_week %>
+
+  <% if habit_data[:at_risk] %>
+  ⚠️ This habit is at risk - you haven't checked in recently!
+  <% end %>
+
+<% end %>
+
+View Dashboard: <%= root_url %>
+
+You can disable weekly summaries in your settings: <%= settings_url %>

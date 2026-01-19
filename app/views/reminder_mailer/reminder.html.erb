@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h1 style="color: #4f46e5;">Hi <%= @user.name %>!</h1>
+
+    <p>You haven't checked in on these habits today:</p>
+
+    <ul style="list-style: none; padding: 0;">
+      <% @habits.each do |habit| %>
+        <li style="padding: 10px; margin: 10px 0; background: #f3f4f6; border-radius: 8px;">
+          <strong><%= habit.name %></strong>
+          <p style="margin: 5px 0 0 0; color: #6b7280;">Goal: <%= habit.goal_per_week %> days/week</p>
+        </li>
+      <% end %>
+    </ul>
+
+    <p>
+      <a href="<%= root_url %>" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 6px; margin-top: 20px;">Check in now</a>
+    </p>
+
+    <p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+      You can disable reminders in your <a href="<%= settings_url %>">settings</a>.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Streaky - Habit Tracker</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-50 min-h-screen">
+    <% if current_user %>
+      <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div class="flex items-center space-x-6">
+            <%= link_to "Streaky", root_path, class: "text-xl font-bold text-indigo-600" %>
+            <%= link_to "Dashboard", root_path, class: "text-gray-600 hover:text-gray-900" %>
+            <%= link_to "Habits", habits_path, class: "text-gray-600 hover:text-gray-900" %>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-gray-600"><%= current_user.name %></span>
+            <%= link_to "Settings", settings_path, class: "text-gray-600 hover:text-gray-900" %>
+            <%= button_to "Sign Out", sign_out_path, method: :delete, class: "text-gray-600 hover:text-gray-900" %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
+    <div id="flash" class="fixed top-4 right-4 z-50">
+      <% flash.each do |type, message| %>
+        <div class="<%= type == 'notice' ? 'bg-green-500' : 'bg-red-500' %> text-white px-6 py-3 rounded-lg shadow-lg mb-2">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+
+    <main class="container mx-auto px-4 py-6">
+      <%= yield %>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<%= turbo_stream.replace "dashboard-header" do %>
+  <%= render "dashboard/header", dashboard_data: @dashboard_data %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(@habit) do %>
+  <% habit_data = @dashboard_data[:habits].find { |h| h[:habit].id == @habit.id } %>
+  <%= render partial: "habits/habit_card", locals: { habit_data: habit_data, dashboard_data: @dashboard_data } if habit_data %>
+<% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <div class="fixed top-4 right-4 z-50">
+    <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+      Check-in updated!
+    </div>
+  </div>
+<% end %>

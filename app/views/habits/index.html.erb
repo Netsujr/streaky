@@ -1,0 +1,17 @@
+<div class="max-w-6xl mx-auto">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Habits</h1>
+    <%= link_to "New Habit", new_habit_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700" %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @habits.each do |habit| %>
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-2"><%= habit.name %></h3>
+        <p class="text-gray-600 mb-4">Goal: <%= habit.goal_per_week %> days/week</p>
+        <%= link_to "View", habit_path(habit), class: "text-indigo-600 hover:text-indigo-800" %>
+        <%= link_to "Archive", archive_habit_path(habit), method: :patch, data: { confirm: "Are you sure?" }, class: "ml-4 text-gray-600 hover:text-gray-800" %>
+      </div>
+    <% end %>
+  </div>
+</div>

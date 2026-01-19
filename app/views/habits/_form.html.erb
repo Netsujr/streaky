@@ -1,0 +1,59 @@
+<%= form_with model: habit || Habit.new, data: { controller: "habit-form" } do |form| %>
+  <% if habit&.errors&.any? %>
+    <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <ul class="list-disc list-inside text-red-600">
+        <% habit.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :name, class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.text_field :name,
+                        required: true,
+                        maxlength: 60,
+                        data: { habit_form_target: "nameField", action: "input->habit-form#validateName" },
+                        class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+    <p data-habit-form-target="nameError" class="mt-1 text-sm text-red-600 hidden"></p>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :goal_per_week, "Goal per week (days)", class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.number_field :goal_per_week,
+                          in: 1..7,
+                          default: 7,
+                          class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :start_date, class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.date_field :start_date,
+                        value: Time.use_zone(current_user.timezone) { Time.zone.today },
+                        class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :color, class: "block text-gray-700 font-medium mb-2" %>
+    <%= form.select :color,
+                    options_for_select([
+                      ['None', ''],
+                      ['Blue', 'blue'],
+                      ['Green', 'green'],
+                      ['Purple', 'purple'],
+                      ['Red', 'red'],
+                      ['Orange', 'orange'],
+                      ['Yellow', 'yellow'],
+                      ['Pink', 'pink'],
+                      ['Indigo', 'indigo']
+                    ], habit&.color),
+                    {},
+                    { class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" } %>
+  </div>
+
+  <div class="flex items-center justify-end space-x-4">
+    <%= link_to "Cancel", root_path, class: "px-4 py-2 text-gray-700 hover:text-gray-900" %>
+    <%= form.submit "Create Habit", class: "bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+  </div>
+<% end %>

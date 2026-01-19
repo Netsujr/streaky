@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h1 style="color: #4f46e5;">Your Weekly Summary</h1>
+
+    <p>Hi <%= @user.name %>, here's your habit progress for the week of <%= @week_start.strftime("%B %d") %> - <%= @week_end.strftime("%B %d") %>:</p>
+
+    <% @habits.each do |habit_data| %>
+      <div style="padding: 20px; margin: 20px 0; background: #f3f4f6; border-radius: 8px;">
+        <h2 style="margin: 0 0 10px 0;"><%= habit_data[:habit].name %></h2>
+
+        <div style="display: flex; gap: 20px; margin: 15px 0;">
+          <div>
+            <strong style="color: #6b7280; display: block;">Current Streak</strong>
+            <span style="font-size: 24px; color: #4f46e5;"><%= habit_data[:current_streak_days] %> days</span>
+          </div>
+          <div>
+            <strong style="color: #6b7280; display: block;">Longest Streak</strong>
+            <span style="font-size: 24px;"><%= habit_data[:longest_streak_days] %> days</span>
+          </div>
+          <div>
+            <strong style="color: #6b7280; display: block;">This Week</strong>
+            <span style="font-size: 24px;"><%= habit_data[:checkins_count] %> / <%= habit_data[:habit].goal_per_week %></span>
+          </div>
+        </div>
+
+        <% if habit_data[:at_risk] %>
+          <p style="color: #dc2626; font-weight: bold; margin-top: 10px;">
+            ⚠️ This habit is at risk - you haven't checked in recently!
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <p style="margin-top: 30px;">
+      <a href="<%= root_url %>" style="display: inline-block; padding: 12px 24px; background: #4f46e5; color: white; text-decoration: none; border-radius: 6px;">View Dashboard</a>
+    </p>
+
+    <p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+      You can disable weekly summaries in your <a href="<%= settings_url %>">settings</a>.
+    </p>
+  </body>
+</html>

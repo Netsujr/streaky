@@ -1,0 +1,11 @@
+Hi <%= @user.name %>!
+
+You haven't checked in on these habits today:
+
+<% @habits.each do |habit| %>
+- <%= habit.name %> (Goal: <%= habit.goal_per_week %> days/week)
+<% end %>
+
+Check in now: <%= root_url %>
+
+You can disable reminders in your settings: <%= settings_url %>

@@ -1,0 +1,71 @@
+  [1m[35m (101.8ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (36.5ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateGoodJobs (20260119193213)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE finished_at IS NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at" ASC) WHERE finished_at IS NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority" ASC NULLS LAST, "created_at" ASC) WHERE finished_at IS NULL[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE batch_id IS NOT NULL[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE batch_callback_id IS NOT NULL[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority" ASC NULLS LAST, "scheduled_at" ASC) WHERE finished_at IS NULL AND locked_by_id IS NULL[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE locked_by_id IS NOT NULL[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20260119193213"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20260119193219)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20260119193219"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHabits (20260119193459)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20260119193459"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCheckins (20260119193504)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+, CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20260119193504"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2026-01-19 19:35:42.213166"], ["updated_at", "2026-01-19 19:35:42.213166"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

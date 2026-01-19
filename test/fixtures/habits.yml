@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  goal_per_week: 1
+  start_date: 2026-01-19
+  archived_at: 2026-01-19 16:34:59
+  color: MyString
+
+two:
+  user: two
+  name: MyString
+  goal_per_week: 1
+  start_date: 2026-01-19
+  archived_at: 2026-01-19 16:34:59
+  color: MyString
