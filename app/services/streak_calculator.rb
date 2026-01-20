@@ -58,16 +58,16 @@ class StreakCalculator
 
   def completion_rate_last_7_days
     dates = checked_in_dates_set(last_n_days: 7)
-    return 0.0 if dates.empty?
+    return 0 if dates.empty?
 
     start_date = reference_date - 6.days
     habit_start = habit.start_date
     effective_start = habit_start > start_date ? habit_start : start_date
     days_in_range = (effective_start..reference_date).count
 
-    return 0.0 if days_in_range.zero?
+    return 0 if days_in_range.zero?
 
-    (dates.count.to_f / days_in_range * 100).round(1)
+    (dates.count.to_f / days_in_range * 100).to_i
   end
 
   private
