@@ -1,10 +1,13 @@
 <div class="max-w-2xl mx-auto">
-  <h1 class="text-3xl font-bold mb-6">Settings</h1>
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">Settings</h1>
+    <p class="text-gray-600">Manage your account preferences</p>
+  </div>
 
-  <%= form_with model: @user, url: settings_path, method: :patch, class: "bg-white rounded-lg shadow-md p-8" do |form| %>
+  <%= form_with model: @user, url: settings_path, method: :patch, class: "bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8" do |form| %>
     <% if @user.errors.any? %>
-      <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-        <ul class="list-disc list-inside text-red-600">
+      <div class="mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
+        <ul class="list-disc list-inside text-red-700 font-medium space-y-1">
           <% @user.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
@@ -12,30 +15,41 @@
       </div>
     <% end %>
 
-    <div class="mb-6">
-      <%= form.label :timezone, class: "block text-gray-700 font-medium mb-2" %>
-      <%= form.time_zone_select :timezone, ActiveSupport::TimeZone.all, { default: @user.timezone }, { class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" } %>
-      <p class="mt-1 text-sm text-gray-500">Your timezone affects when "today" is calculated for habits</p>
+    <div class="mb-8">
+      <label class="block text-gray-700 font-semibold mb-3 text-sm">Timezone</label>
+      <%= form.time_zone_select :timezone, ActiveSupport::TimeZone.all, { default: @user.timezone }, { class: "w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white" } %>
+      <p class="mt-2 text-sm text-gray-500 flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Your timezone affects when "today" is calculated for habits
+      </p>
     </div>
 
-    <div class="mb-6">
-      <div class="flex items-center mb-2">
-        <%= form.check_box :weekly_summary_enabled, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
-        <%= form.label :weekly_summary_enabled, "Enable weekly summary emails", class: "ml-2 text-gray-700 font-medium" %>
+    <div class="mb-8 space-y-6">
+      <div class="p-5 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border border-indigo-200/50">
+        <div class="flex items-start space-x-3">
+          <%= form.check_box :weekly_summary_enabled, class: "mt-1 w-5 h-5 text-indigo-600 border-2 border-gray-300 rounded focus:ring-indigo-500 focus:ring-2" %>
+          <div class="flex-1">
+            <%= form.label :weekly_summary_enabled, "Enable weekly summary emails", class: "text-gray-900 font-semibold cursor-pointer" %>
+            <p class="mt-1 text-sm text-gray-600">Receive a weekly summary of your progress every Monday</p>
+          </div>
+        </div>
       </div>
-      <p class="ml-6 text-sm text-gray-500">Receive a weekly summary of your progress every Monday</p>
-    </div>
 
-    <div class="mb-6">
-      <div class="flex items-center mb-2">
-        <%= form.check_box :reminders_enabled, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
-        <%= form.label :reminders_enabled, "Enable daily reminder emails", class: "ml-2 text-gray-700 font-medium" %>
+      <div class="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-200/50">
+        <div class="flex items-start space-x-3">
+          <%= form.check_box :reminders_enabled, class: "mt-1 w-5 h-5 text-indigo-600 border-2 border-gray-300 rounded focus:ring-indigo-500 focus:ring-2" %>
+          <div class="flex-1">
+            <%= form.label :reminders_enabled, "Enable daily reminder emails", class: "text-gray-900 font-semibold cursor-pointer" %>
+            <p class="mt-1 text-sm text-gray-600">Receive a reminder if you haven't checked in today</p>
+          </div>
+        </div>
       </div>
-      <p class="ml-6 text-sm text-gray-500">Receive a reminder if you haven't checked in today</p>
     </div>
 
-    <div class="flex items-center justify-end">
-      <%= form.submit "Save Settings", class: "bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+    <div class="flex items-center justify-end pt-4 border-t border-gray-200">
+      <%= form.submit "Save Settings", class: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-semibold" %>
     </div>
   <% end %>
 </div>

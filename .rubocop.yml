@@ -1,0 +1,17 @@
+# RuboCop configuration
+# Exclude ERB files from Ruby linting since they contain HTML/ERB syntax
+AllCops:
+  Exclude:
+    - 'app/views/**/*.erb'
+    - 'app/views/**/*.html.erb'
+    - 'app/views/**/*.js.erb'
+    - 'app/views/**/*.turbo_stream.erb'
+    - 'app/mailers/**/*.erb'
+    - 'app/mailers/**/*.html.erb'
+    - 'app/mailers/**/*.text.erb'
+    - 'config/**/*.erb'
+    - 'db/**/*.erb'
+    - 'lib/**/*.erb'
+    - 'test/**/*.erb'
+    - 'spec/**/*.erb'
+    - 'vendor/**/*'

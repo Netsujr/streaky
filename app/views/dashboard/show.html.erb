@@ -1,9 +1,17 @@
-<div class="max-w-6xl mx-auto">
+<div class="max-w-7xl mx-auto">
   <%= render "dashboard/header", dashboard_data: @dashboard_data %>
 
-  <div class="mb-6 flex items-center justify-between">
-    <h2 class="text-2xl font-semibold">Your Habits</h2>
-    <%= link_to "New Habit", new_habit_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700" %>
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900">Your Habits</h2>
+      <p class="text-gray-600 mt-1">Keep your streak going</p>
+    </div>
+    <%= link_to new_habit_path, class: "group inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-medium" do %>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      <span>New Habit</span>
+    <% end %>
   </div>
 
   <div id="habits-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -11,9 +19,20 @@
   </div>
 
   <% if @dashboard_data[:habits].empty? %>
-    <div class="text-center py-12 bg-white rounded-lg shadow-md">
-      <p class="text-gray-600 mb-4">You don't have any habits yet.</p>
-      <%= link_to "Create Your First Habit", new_habit_path, class: "bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700" %>
+    <div class="text-center py-16 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50">
+      <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center">
+        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-2">No habits yet</h3>
+      <p class="text-gray-600 mb-6 max-w-md mx-auto">Start your journey by creating your first habit. Small steps lead to big changes!</p>
+      <%= link_to new_habit_path, class: "inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-medium" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span>Create Your First Habit</span>
+      <% end %>
     </div>
   <% end %>
 </div>

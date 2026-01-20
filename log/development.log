@@ -69,3 +69,1562 @@ FOREIGN KEY ("user_id")
   [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (1.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(7174456964686492215)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Demo User"], ["email", "demo@streaky.app"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-01-20 10:02:48.139041"], ["updated_at", "2026-01-20 10:02:48.139041"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (2.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Daily Exercise"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (5.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Daily Exercise"], ["goal_per_week", 7], ["start_date", "2025-12-21"], ["archived_at", nil], ["color", "blue"], ["created_at", "2026-01-20 10:02:48.179328"], ["updated_at", "2026-01-20 10:02:48.179328"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.2ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.7ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["goal_per_week", 5], ["start_date", "2025-12-31"], ["archived_at", nil], ["color", "green"], ["created_at", "2026-01-20 10:02:48.188469"], ["updated_at", "2026-01-20 10:02:48.188469"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Meditate"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Meditate"], ["goal_per_week", 7], ["start_date", "2026-01-06"], ["archived_at", nil], ["color", "purple"], ["created_at", "2026-01-20 10:02:48.192064"], ["updated_at", "2026-01-20 10:02:48.192064"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (2.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-20 10:02:48.209438"], ["updated_at", "2026-01-20 10:02:48.209438"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.0ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-20 10:02:48.214628"], ["updated_at", "2026-01-20 10:02:48.214628"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-19"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-19"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-19"], ["created_at", "2026-01-20 10:02:48.219447"], ["updated_at", "2026-01-20 10:02:48.219447"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-19"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-19"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.0ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-19"], ["created_at", "2026-01-20 10:02:48.223362"], ["updated_at", "2026-01-20 10:02:48.223362"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-20 10:02:48.227550"], ["updated_at", "2026-01-20 10:02:48.227550"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.9ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-20 10:02:48.232116"], ["updated_at", "2026-01-20 10:02:48.232116"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-20 10:02:48.236254"], ["updated_at", "2026-01-20 10:02:48.236254"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-17"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-17"], ["created_at", "2026-01-20 10:02:48.239835"], ["updated_at", "2026-01-20 10:02:48.239835"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-20 10:02:48.243558"], ["updated_at", "2026-01-20 10:02:48.243558"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-20 10:02:48.246954"], ["updated_at", "2026-01-20 10:02:48.246954"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-20 10:02:48.250563"], ["updated_at", "2026-01-20 10:02:48.250563"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-15"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["created_at", "2026-01-20 10:02:48.253930"], ["updated_at", "2026-01-20 10:02:48.253930"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-15"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-15"], ["created_at", "2026-01-20 10:02:48.257685"], ["updated_at", "2026-01-20 10:02:48.257685"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-14"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-14"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-14"], ["created_at", "2026-01-20 10:02:48.261463"], ["updated_at", "2026-01-20 10:02:48.261463"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-14"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-14"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-14"], ["created_at", "2026-01-20 10:02:48.266203"], ["updated_at", "2026-01-20 10:02:48.266203"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-13"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-13"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-13"], ["created_at", "2026-01-20 10:02:48.269930"], ["updated_at", "2026-01-20 10:02:48.269930"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-12"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-12"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-12"], ["created_at", "2026-01-20 10:02:48.273435"], ["updated_at", "2026-01-20 10:02:48.273435"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-12"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-12"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-12"], ["created_at", "2026-01-20 10:02:48.277485"], ["updated_at", "2026-01-20 10:02:48.277485"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-10"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-10"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-10"], ["created_at", "2026-01-20 10:02:48.281131"], ["updated_at", "2026-01-20 10:02:48.281131"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-10"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-10"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-10"], ["created_at", "2026-01-20 10:02:48.284291"], ["updated_at", "2026-01-20 10:02:48.284291"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-09"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-09"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-09"], ["created_at", "2026-01-20 10:02:48.287530"], ["updated_at", "2026-01-20 10:02:48.287530"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-08"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-08"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-08"], ["created_at", "2026-01-20 10:02:48.291188"], ["updated_at", "2026-01-20 10:02:48.291188"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-07"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-07"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-07"], ["created_at", "2026-01-20 10:02:48.294745"], ["updated_at", "2026-01-20 10:02:48.294745"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+[GoodJob] [23964] GoodJob 4.13.1 started scheduler with queues=* max_threads=5.
+Started GET "/" for 127.0.0.1 at 2026-01-20 07:02:57 -0300
+  [1m[35m (0.1ms)[0m  [1m[35mSET application_name = 'GoodJob::Notifier'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mLISTEN good_job[0m
+[GoodJob] Notifier subscribed with LISTEN
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mGoodJob::Job Pluck (21.4ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" > $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:02:57.726538"], ["LIMIT", 10000]]
+Processing by DashboardController#show as HTML
+  [1m[36mGoodJob::Job Pluck (0.9ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" < $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:02:57.750772"], ["LIMIT", 5]]
+Redirected to http://127.0.0.1:3000/sign_in
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 7ms (ActiveRecord: 0.0ms | Allocations: 4480)
+
+
+  [1m[36mGoodJob::Process Load (5.4ms)[0m  [1m[34mSELECT "good_job_processes".* FROM "good_job_processes" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE ("good_job_processes"."lock_type" = $1 AND "pg_locks"."locktype" IS NULL OR "good_job_processes"."lock_type" IS NULL AND "good_job_processes"."updated_at" < '2026-01-20 09:57:57.754139') ORDER BY "good_job_processes"."id" ASC LIMIT $2[0m  [["lock_type", 0], ["LIMIT", 1000]]
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:02:57 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 9.1ms | Allocations: 4363)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Process Create (11.0ms)[0m  [1m[32mINSERT INTO "good_job_processes" ("id", "created_at", "updated_at", "state", "lock_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id", "25a41c50-abbb-4562-baba-fb8db28e6ce3"], ["created_at", "2026-01-20 10:02:58.816536"], ["updated_at", "2026-01-20 10:02:58.816536"], ["state", "{\"hostname\":\"Renato-Hivelocity-M3.local\",\"pid\":23964,\"memory\":116464,\"proctitle\":\"./bin/rails\",\"preserve_job_records\":true,\"retry_on_unhandled_error\":false,\"schedulers\":[{\"name\":\"GoodJob::Scheduler(queues=* max_threads=5)\",\"queues\":\"*\",\"max_threads\":5,\"active_threads\":1,\"available_threads\":4,\"max_cache\":10000,\"active_cache\":0,\"available_cache\":10000,\"empty_executions_count\":0,\"errored_executions_count\":0,\"succeeded_executions_count\":0,\"total_executions_count\":0,\"execution_at\":null,\"check_queue_at\":null}],\"cron_enabled\":false,\"total_succeeded_executions_count\":0,\"total_errored_executions_count\":0,\"database_connection_pool\":{\"size\":5,\"active\":1}}"], ["lock_type", 0]]
+  [1m[36mGoodJob::Lockable Advisory Lock (4.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS locked[0m  [["key", "good_job_processes-25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGoodJob::Job Load (25.5ms)[0m  [1m[34mSELECT "good_jobs"."id", "good_jobs"."queue_name", "good_jobs"."priority", "good_jobs"."serialized_params", "good_jobs"."scheduled_at", "good_jobs"."performed_at", "good_jobs"."finished_at", "good_jobs"."error", "good_jobs"."created_at", "good_jobs"."updated_at", "good_jobs"."active_job_id", "good_jobs"."concurrency_key", "good_jobs"."cron_key", "good_jobs"."cron_at", "good_jobs"."batch_id", "good_jobs"."batch_callback_id", "good_jobs"."executions_count", "good_jobs"."job_class", "good_jobs"."error_event", "good_jobs"."labels", "good_jobs"."locked_by_id", "good_jobs"."locked_at" FROM "good_jobs" WHERE "good_jobs"."id" IN (WITH "rows" AS  MATERIALIZED (SELECT "good_jobs"."id" FROM "good_jobs" WHERE "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" <= $1 ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC) SELECT "rows"."id" FROM "rows" WHERE pg_try_advisory_lock(('x' || substr(md5('good_jobs' || '-' || "rows"."id"::text), 1, 16))::bit(64)::bigint) LIMIT $2) ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC[0m  [["scheduled_at", "2026-01-20 10:02:58.841305"], ["LIMIT", 1]]
+  Rendered layout layouts/application.html.erb (Duration: 1068.6ms | Allocations: 119996)
+Completed 200 OK in 1098ms (Views: 1070.7ms | ActiveRecord: 8.0ms | Allocations: 134718)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2026-01-20 07:03:15 -0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 108.8ms | Allocations: 173988)
+  Rendered layout layouts/application.html.erb (Duration: 111.0ms | Allocations: 176255)
+Completed 200 OK in 117ms (Views: 115.1ms | ActiveRecord: 0.0ms | Allocations: 177450)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:03:17 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 9.5ms | Allocations: 2363)
+  Rendered layout layouts/application.html.erb (Duration: 13.0ms | Allocations: 4414)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.0ms | Allocations: 4976)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:09:37 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 5.6ms | Allocations: 2924)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 5864)
+Completed 200 OK in 19ms (Views: 15.2ms | ActiveRecord: 0.0ms | Allocations: 7051)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2026-01-20 07:09:39 -0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 10.1ms | Allocations: 8921)
+  Rendered layout layouts/application.html.erb (Duration: 12.7ms | Allocations: 11165)
+Completed 200 OK in 16ms (Views: 14.6ms | ActiveRecord: 0.0ms | Allocations: 12086)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2026-01-20 07:09:42 -0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 6.7ms | Allocations: 8191)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | Allocations: 10240)
+Completed 200 OK in 18ms (Views: 10.2ms | ActiveRecord: 0.0ms | Allocations: 10758)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:09:45 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 2371)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 4415)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.0ms | Allocations: 4887)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-20 07:09:48 -0300
+Processing by DashboardController#show as HTML
+Redirected to http://127.0.0.1:3000/sign_in
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms | Allocations: 353)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:09:48 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 2364)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 4407)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.0ms | Allocations: 4863)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:11:47 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2906)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | Allocations: 5817)
+Completed 200 OK in 17ms (Views: 14.8ms | ActiveRecord: 0.0ms | Allocations: 6991)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:18:55 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 1.9ms | Allocations: 2870)
+  Rendered layout layouts/authentication.html.erb (Duration: 14.7ms | Allocations: 34534)
+Completed 200 OK in 57ms (Views: 15.9ms | ActiveRecord: 16.3ms | Allocations: 43375)
+
+
+  [1m[35m (0.6ms)[0m  [1m[35mUNLISTEN *[0m
+[GoodJob] Notifier unsubscribed with UNLISTEN
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Unlock (1.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS unlocked[0m  [["key", "good_job_processes-25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  [1m[36mGoodJob::Process Destroy (1.3ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  [1m[36mGoodJob::Job Update All (11.6ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1 WHERE "good_jobs"."locked_by_id" = $2[0m  [["locked_by_id", nil], ["locked_by_id", "25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+[GoodJob] [31935] GoodJob 4.13.1 started scheduler with queues=* max_threads=5.
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:19:04 -0300
+  [1m[35m (0.0ms)[0m  [1m[35mSET application_name = 'GoodJob::Notifier'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mLISTEN good_job[0m
+[GoodJob] Notifier subscribed with LISTEN
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mGoodJob::Job Pluck (5.4ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" > $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:19:04.964687"], ["LIMIT", 10000]]
+  [1m[36mGoodJob::Job Pluck (3.4ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" < $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:19:04.973447"], ["LIMIT", 5]]
+Processing by SessionsController#new as HTML
+  [1m[36mGoodJob::Process Load (9.3ms)[0m  [1m[34mSELECT "good_job_processes".* FROM "good_job_processes" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE ("good_job_processes"."lock_type" = $1 AND "pg_locks"."locktype" IS NULL OR "good_job_processes"."lock_type" IS NULL AND "good_job_processes"."updated_at" < '2026-01-20 10:14:04.998572') ORDER BY "good_job_processes"."id" ASC LIMIT $2[0m  [["lock_type", 0], ["LIMIT", 1000]]
+  [1m[36mGoodJob::Job Update All (2.5ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1, "locked_at" = $2 WHERE "good_jobs"."locked_by_id" = $3[0m  [["locked_by_id", nil], ["locked_at", nil], ["locked_by_id", "25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  [1m[36mGoodJob::Process Destroy (2.0ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "25a41c50-abbb-4562-baba-fb8db28e6ce3"]]
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 3.7ms | Allocations: 4086)
+  Rendered layout layouts/authentication.html.erb (Duration: 32.0ms | Allocations: 57387)
+Completed 200 OK in 71ms (Views: 33.8ms | ActiveRecord: 15.2ms | Allocations: 80703)
+
+
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Process Create (19.0ms)[0m  [1m[32mINSERT INTO "good_job_processes" ("id", "created_at", "updated_at", "state", "lock_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"], ["created_at", "2026-01-20 10:19:05.081278"], ["updated_at", "2026-01-20 10:19:05.081278"], ["state", "{\"hostname\":\"Renato-Hivelocity-M3.local\",\"pid\":31935,\"memory\":105152,\"proctitle\":\"./bin/rails\",\"preserve_job_records\":true,\"retry_on_unhandled_error\":false,\"schedulers\":[{\"name\":\"GoodJob::Scheduler(queues=* max_threads=5)\",\"queues\":\"*\",\"max_threads\":5,\"active_threads\":1,\"available_threads\":4,\"max_cache\":10000,\"active_cache\":0,\"available_cache\":10000,\"empty_executions_count\":0,\"errored_executions_count\":0,\"succeeded_executions_count\":0,\"total_executions_count\":0,\"execution_at\":null,\"check_queue_at\":null}],\"cron_enabled\":false,\"total_succeeded_executions_count\":0,\"total_errored_executions_count\":0,\"database_connection_pool\":{\"size\":5,\"active\":2}}"], ["lock_type", nil]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Lock (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS locked[0m  [["key", "good_job_processes-c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mGoodJob::Process Update (1.5ms)[0m  [1m[33mUPDATE "good_job_processes" SET "updated_at" = $1, "lock_type" = $2 WHERE "good_job_processes"."id" = $3[0m  [["updated_at", "2026-01-20 10:19:05.109895"], ["lock_type", 0], ["id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGoodJob::Job Load (9.4ms)[0m  [1m[34mSELECT "good_jobs"."id", "good_jobs"."queue_name", "good_jobs"."priority", "good_jobs"."serialized_params", "good_jobs"."scheduled_at", "good_jobs"."performed_at", "good_jobs"."finished_at", "good_jobs"."error", "good_jobs"."created_at", "good_jobs"."updated_at", "good_jobs"."active_job_id", "good_jobs"."concurrency_key", "good_jobs"."cron_key", "good_jobs"."cron_at", "good_jobs"."batch_id", "good_jobs"."batch_callback_id", "good_jobs"."executions_count", "good_jobs"."job_class", "good_jobs"."error_event", "good_jobs"."labels", "good_jobs"."locked_by_id", "good_jobs"."locked_at" FROM "good_jobs" WHERE "good_jobs"."id" IN (WITH "rows" AS  MATERIALIZED (SELECT "good_jobs"."id" FROM "good_jobs" WHERE "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" <= $1 ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC) SELECT "rows"."id" FROM "rows" WHERE pg_try_advisory_lock(('x' || substr(md5('good_jobs' || '-' || "rows"."id"::text), 1, 16))::bit(64)::bigint) LIMIT $2) ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC[0m  [["scheduled_at", "2026-01-20 10:19:05.107232"], ["LIMIT", 1]]
+Started GET "/" for ::1 at 2026-01-20 07:19:13 -0300
+Processing by DashboardController#show as HTML
+Redirected to http://[::1]:3000/sign_in
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 497)
+
+
+Started GET "/sign_in" for ::1 at 2026-01-20 07:19:13 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 1.2ms | Allocations: 2461)
+  Rendered layout layouts/authentication.html.erb (Duration: 3.1ms | Allocations: 4621)
+Completed 200 OK in 5ms (Views: 3.7ms | ActiveRecord: 0.0ms | Allocations: 5016)
+
+
+  [1m[35m (0.5ms)[0m  [1m[35mUNLISTEN *[0m
+[GoodJob] Notifier unsubscribed with UNLISTEN
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Unlock (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS unlocked[0m  [["key", "good_job_processes-c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mGoodJob::Process Destroy (0.6ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mGoodJob::Job Update All (4.8ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1 WHERE "good_jobs"."locked_by_id" = $2[0m  [["locked_by_id", nil], ["locked_by_id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+[GoodJob] [38897] GoodJob 4.13.1 started scheduler with queues=* max_threads=5.
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:33:35 -0300
+  [1m[35m (0.0ms)[0m  [1m[35mSET application_name = 'GoodJob::Notifier'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mLISTEN good_job[0m
+[GoodJob] Notifier subscribed with LISTEN
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mGoodJob::Job Pluck (5.6ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" > $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:33:35.249390"], ["LIMIT", 10000]]
+  [1m[36mGoodJob::Job Pluck (2.7ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" < $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 10:33:35.259023"], ["LIMIT", 5]]
+  [1m[36mGoodJob::Process Load (6.2ms)[0m  [1m[34mSELECT "good_job_processes".* FROM "good_job_processes" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE ("good_job_processes"."lock_type" = $1 AND "pg_locks"."locktype" IS NULL OR "good_job_processes"."lock_type" IS NULL AND "good_job_processes"."updated_at" < '2026-01-20 10:28:35.270624') ORDER BY "good_job_processes"."id" ASC LIMIT $2[0m  [["lock_type", 0], ["LIMIT", 1000]]
+Processing by SessionsController#new as HTML
+  [1m[36mGoodJob::Job Update All (9.8ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1, "locked_at" = $2 WHERE "good_jobs"."locked_by_id" = $3[0m  [["locked_by_id", nil], ["locked_at", nil], ["locked_by_id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  [1m[36mGoodJob::Process Destroy (2.0ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "c9c94b32-26c7-4a3e-b287-7bcb872d052f"]]
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 3.3ms | Allocations: 4086)
+  Rendered layout layouts/authentication.html.erb (Duration: 31.1ms | Allocations: 56894)
+Completed 200 OK in 67ms (Views: 32.6ms | ActiveRecord: 12.4ms | Allocations: 76989)
+
+
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Process Create (56.9ms)[0m  [1m[32mINSERT INTO "good_job_processes" ("id", "created_at", "updated_at", "state", "lock_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"], ["created_at", "2026-01-20 10:33:35.405038"], ["updated_at", "2026-01-20 10:33:35.405038"], ["state", "{\"hostname\":\"Renato-Hivelocity-M3.local\",\"pid\":38897,\"memory\":108576,\"proctitle\":\"./bin/rails\",\"preserve_job_records\":true,\"retry_on_unhandled_error\":false,\"schedulers\":[{\"name\":\"GoodJob::Scheduler(queues=* max_threads=5)\",\"queues\":\"*\",\"max_threads\":5,\"active_threads\":1,\"available_threads\":4,\"max_cache\":10000,\"active_cache\":0,\"available_cache\":10000,\"empty_executions_count\":0,\"errored_executions_count\":0,\"succeeded_executions_count\":0,\"total_executions_count\":0,\"execution_at\":null,\"check_queue_at\":null}],\"cron_enabled\":false,\"total_succeeded_executions_count\":0,\"total_errored_executions_count\":0,\"database_connection_pool\":{\"size\":5,\"active\":2}}"], ["lock_type", nil]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Lock (47.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS locked[0m  [["key", "good_job_processes-428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mGoodJob::Process Update (1.6ms)[0m  [1m[33mUPDATE "good_job_processes" SET "updated_at" = $1, "lock_type" = $2 WHERE "good_job_processes"."id" = $3[0m  [["updated_at", "2026-01-20 10:33:35.518222"], ["lock_type", 0], ["id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGoodJob::Job Load (54.4ms)[0m  [1m[34mSELECT "good_jobs"."id", "good_jobs"."queue_name", "good_jobs"."priority", "good_jobs"."serialized_params", "good_jobs"."scheduled_at", "good_jobs"."performed_at", "good_jobs"."finished_at", "good_jobs"."error", "good_jobs"."created_at", "good_jobs"."updated_at", "good_jobs"."active_job_id", "good_jobs"."concurrency_key", "good_jobs"."cron_key", "good_jobs"."cron_at", "good_jobs"."batch_id", "good_jobs"."batch_callback_id", "good_jobs"."executions_count", "good_jobs"."job_class", "good_jobs"."error_event", "good_jobs"."labels", "good_jobs"."locked_by_id", "good_jobs"."locked_at" FROM "good_jobs" WHERE "good_jobs"."id" IN (WITH "rows" AS  MATERIALIZED (SELECT "good_jobs"."id" FROM "good_jobs" WHERE "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" <= $1 ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC) SELECT "rows"."id" FROM "rows" WHERE pg_try_advisory_lock(('x' || substr(md5('good_jobs' || '-' || "rows"."id"::text), 1, 16))::bit(64)::bigint) LIMIT $2) ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC[0m  [["scheduled_at", "2026-01-20 10:33:35.468811"], ["LIMIT", 1]]
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:33:36 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 2.0ms | Allocations: 2455)
+  Rendered layout layouts/authentication.html.erb (Duration: 5.5ms | Allocations: 4618)
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.0ms | Allocations: 5155)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2026-01-20 07:33:37 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 2.3ms | Allocations: 2365)
+  Rendered layout layouts/authentication.html.erb (Duration: 7.6ms | Allocations: 4500)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.0ms | Allocations: 4945)
+
+
+Started GET "/" for ::1 at 2026-01-20 07:36:39 -0300
+Processing by DashboardController#show as HTML
+Redirected to http://localhost:3000/sign_in
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 584)
+
+
+Started GET "/sign_in" for ::1 at 2026-01-20 07:36:39 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 1.6ms | Allocations: 2462)
+  Rendered layout layouts/authentication.html.erb (Duration: 16.7ms | Allocations: 6975)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.0ms | Allocations: 7444)
+
+
+Started POST "/sign_in" for ::1 at 2026-01-20 07:37:09 -0300
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"demo@streaky.app", "password"=>"[FILTERED]", "commit"=>"Sign In"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:11:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 235ms (ActiveRecord: 1.4ms | Allocations: 1732)
+
+
+Started GET "/" for ::1 at 2026-01-20 07:37:09 -0300
+Processing by DashboardController#show as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (1.8ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (2.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (2.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-14"], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (1.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (1.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (3.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.6ms | Allocations: 180)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 11.0ms | Allocations: 7020)
+  Rendered habits/_form.html.erb (Duration: 21.8ms | Allocations: 6078)
+  Rendered habits/_form_modal.html.erb (Duration: 22.4ms | Allocations: 6418)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 37.5ms | Allocations: 14565)
+  Rendered layout layouts/application.html.erb (Duration: 37.7ms | Allocations: 14650)
+Completed 500 Internal Server Error in 125ms (ActiveRecord: 35.7ms | Allocations: 44666)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `habit' for #<ActionView::Base:0x0000000000d908>
+
+            @virtual_path = "habits/_form";;@output_buffer.append=  form_with model: habit || Habit.new, data: { controller: "habit-form" } do |form| @output_buffer.safe_append='
+                                                                                     ^^^^^
+Did you mean?  habit_url):
+    1: <%= form_with model: habit || Habit.new, data: { controller: "habit-form" } do |form| %>
+    2:   <div class="mb-6">
+    3:     <h2 class="text-2xl font-bold text-gray-900 mb-2"><%= habit&.persisted? ? 'Edit Habit' : 'New Habit' %></h2>
+    4:     <p class="text-gray-600 text-sm">Track your progress and build consistency</p>
+  
+app/views/habits/_form.html.erb:1
+app/views/habits/_form_modal.html.erb:4
+app/views/habits/_form_modal.html.erb:3
+app/views/dashboard/show.html.erb:40
+Started GET "/sign_in" for ::1 at 2026-01-20 07:42:37 -0300
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+Redirected to http://localhost:3000/
+Filter chain halted as :skip_authentication rendered or redirected
+Completed 302 Found in 39ms (ActiveRecord: 18.2ms | Allocations: 4608)
+
+
+Started GET "/" for ::1 at 2026-01-20 07:42:37 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (1.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (2.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (5.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-14"], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.5ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.6ms | Allocations: 6869)
+  Rendered habits/_form.html.erb (Duration: 16.7ms | Allocations: 5764)
+  Rendered habits/_form_modal.html.erb (Duration: 17.7ms | Allocations: 6123)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 25.8ms | Allocations: 13990)
+  Rendered layout layouts/application.html.erb (Duration: 29.1ms | Allocations: 17425)
+Completed 200 OK in 66ms (Views: 30.8ms | ActiveRecord: 15.9ms | Allocations: 28258)
+
+
+Started POST "/habits/2/toggle_checkin?date=2026-01-17" for ::1 at 2026-01-20 07:52:56 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-17", "habit_id"=>"2"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.9ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (1.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 2], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-17"], ["habit_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Create (5.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["created_at", "2026-01-20 10:52:56.270748"], ["updated_at", "2026-01-20 10:52:56.270748"]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mHabit Load (0.8ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (3.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-14"], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered habits/_habit_card.html.erb (Duration: 3.3ms | Allocations: 2800)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 6.6ms | Allocations: 4174)
+Completed 200 OK in 92ms (Views: 8.8ms | ActiveRecord: 37.6ms | Allocations: 24176)
+
+
+Started POST "/habits/2/toggle_checkin?date=2026-01-17" for ::1 at 2026-01-20 07:52:58 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-17", "habit_id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 2], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mCheckin Destroy (0.8ms)[0m  [1m[31mDELETE FROM "checkins" WHERE "checkins"."id" = $1[0m  [["id", 24]]
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-14"], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-20')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-14')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-20"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered habits/_habit_card.html.erb (Duration: 2.0ms | Allocations: 2079)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 2.6ms | Allocations: 2481)
+Completed 200 OK in 38ms (Views: 3.0ms | ActiveRecord: 7.1ms | Allocations: 15708)
+
+
+Started GET "/settings" for ::1 at 2026-01-20 07:53:03 -0300
+Processing by SettingsController#show as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/show.html.erb within layouts/application
+  Rendered settings/show.html.erb within layouts/application (Duration: 91.5ms | Allocations: 172639)
+  Rendered layout layouts/application.html.erb (Duration: 93.6ms | Allocations: 175378)
+Completed 200 OK in 102ms (Views: 97.0ms | ActiveRecord: 0.8ms | Allocations: 177068)
+
+
+Started PATCH "/settings" for ::1 at 2026-01-20 07:53:07 -0300
+Processing by SettingsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"timezone"=>"International Date Line West", "weekly_summary_enabled"=>"1", "reminders_enabled"=>"1"}, "commit"=>"Save Settings"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@streaky.app"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Update (1.2ms)[0m  [1m[33mUPDATE "users" SET "timezone" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["timezone", "International Date Line West"], ["updated_at", "2026-01-20 10:53:07.129564"], ["id", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+Redirected to http://localhost:3000/settings
+Completed 302 Found in 17ms (ActiveRecord: 3.9ms | Allocations: 4646)
+
+
+Started GET "/settings" for ::1 at 2026-01-20 07:53:07 -0300
+Processing by SettingsController#show as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/show.html.erb within layouts/application
+  Rendered settings/show.html.erb within layouts/application (Duration: 4.2ms | Allocations: 7495)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 9983)
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.3ms | Allocations: 11068)
+
+
+Started GET "/" for ::1 at 2026-01-20 07:53:08 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.5ms | Allocations: 6231)
+  Rendered habits/_form.html.erb (Duration: 1.6ms | Allocations: 1614)
+  Rendered habits/_form_modal.html.erb (Duration: 1.8ms | Allocations: 1723)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 8.0ms | Allocations: 8224)
+  Rendered layout layouts/application.html.erb (Duration: 11.1ms | Allocations: 10712)
+Completed 200 OK in 35ms (Views: 11.7ms | ActiveRecord: 5.7ms | Allocations: 20743)
+
+
+Started GET "/habits" for ::1 at 2026-01-20 07:53:08 -0300
+Processing by HabitsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/index.html.erb within layouts/application
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/index.html.erb:16
+  Rendered habits/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1662)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | Allocations: 4399)
+Completed 200 OK in 12ms (Views: 7.0ms | ActiveRecord: 1.1ms | Allocations: 6421)
+
+
+Started GET "/habits/new" for ::1 at 2026-01-20 07:53:12 -0300
+Processing by HabitsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/new.html.erb within layouts/application
+  Rendered habits/_form.html.erb (Duration: 2.5ms | Allocations: 1687)
+  Rendered habits/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1962)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 4443)
+Completed 200 OK in 18ms (Views: 12.2ms | ActiveRecord: 0.4ms | Allocations: 5894)
+
+
+Started GET "/settings" for ::1 at 2026-01-20 07:53:12 -0300
+Processing by SettingsController#show as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/show.html.erb within layouts/application
+  Rendered settings/show.html.erb within layouts/application (Duration: 6.0ms | Allocations: 7488)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 9969)
+Completed 200 OK in 15ms (Views: 11.0ms | ActiveRecord: 0.6ms | Allocations: 11013)
+
+
+Started GET "/" for ::1 at 2026-01-20 07:53:13 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 3.5ms | Allocations: 6222)
+  Rendered habits/_form.html.erb (Duration: 1.2ms | Allocations: 1558)
+  Rendered habits/_form_modal.html.erb (Duration: 1.3ms | Allocations: 1667)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 5.5ms | Allocations: 8155)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | Allocations: 10643)
+Completed 200 OK in 39ms (Views: 7.8ms | ActiveRecord: 3.6ms | Allocations: 20667)
+
+
+Started POST "/habits/3/toggle_checkin?date=2026-01-16" for ::1 at 2026-01-20 07:54:05 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-16", "habit_id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 3], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mCheckin Destroy (0.7ms)[0m  [1m[31mDELETE FROM "checkins" WHERE "checkins"."id" = $1[0m  [["id", 11]]
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered habits/_habit_card.html.erb (Duration: 2.2ms | Allocations: 2078)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 2.7ms | Allocations: 2483)
+Completed 200 OK in 43ms (Views: 3.3ms | ActiveRecord: 8.5ms | Allocations: 15182)
+
+
+Started POST "/habits/3/toggle_checkin?date=2026-01-16" for ::1 at 2026-01-20 07:54:07 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-16", "habit_id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 3], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Create (1.1ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-20 10:54:07.092330"], ["updated_at", "2026-01-20 10:54:07.092330"]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mHabit Load (0.2ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered habits/_habit_card.html.erb (Duration: 1.8ms | Allocations: 2078)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 2.3ms | Allocations: 2479)
+Completed 200 OK in 42ms (Views: 2.7ms | ActiveRecord: 9.3ms | Allocations: 16480)
+
+
+Started POST "/habits/3/toggle_checkin?date=2026-01-13" for ::1 at 2026-01-20 07:54:07 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-13", "habit_id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 3], ["occurred_on", "2026-01-13"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-13"], ["habit_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mCheckin Create (0.9ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-13"], ["created_at", "2026-01-20 10:54:08.021900"], ["updated_at", "2026-01-20 10:54:08.021900"]]
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:14:in `toggle'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered habits/_habit_card.html.erb (Duration: 2.6ms | Allocations: 2078)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 4.5ms | Allocations: 2479)
+Completed 200 OK in 44ms (Views: 5.0ms | ActiveRecord: 8.1ms | Allocations: 16545)
+
+
+  [1m[35m (0.7ms)[0m  [1m[35mUNLISTEN *[0m
+[GoodJob] Notifier unsubscribed with UNLISTEN
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Unlock (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS unlocked[0m  [["key", "good_job_processes-428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mGoodJob::Process Destroy (0.7ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mGoodJob::Job Update All (5.9ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1 WHERE "good_jobs"."locked_by_id" = $2[0m  [["locked_by_id", nil], ["locked_by_id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+[GoodJob] [67547] GoodJob 4.13.1 started scheduler with queues=* max_threads=5.
+Started GET "/" for ::1 at 2026-01-20 08:00:23 -0300
+  [1m[35m (0.4ms)[0m  [1m[35mSET application_name = 'GoodJob::Notifier'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mLISTEN good_job[0m
+[GoodJob] Notifier subscribed with LISTEN
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mGoodJob::Job Pluck (9.1ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" > $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 11:00:23.237178"], ["LIMIT", 10000]]
+  [1m[36mGoodJob::Process Load (4.7ms)[0m  [1m[34mSELECT "good_job_processes".* FROM "good_job_processes" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE ("good_job_processes"."lock_type" = $1 AND "pg_locks"."locktype" IS NULL OR "good_job_processes"."lock_type" IS NULL AND "good_job_processes"."updated_at" < '2026-01-20 10:55:23.245255') ORDER BY "good_job_processes"."id" ASC LIMIT $2[0m  [["lock_type", 0], ["LIMIT", 1000]]
+  [1m[36mGoodJob::Job Pluck (5.6ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" < $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-20 11:00:23.252451"], ["LIMIT", 5]]
+Processing by DashboardController#show as HTML
+  [1m[36mGoodJob::Job Update All (1.3ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1, "locked_at" = $2 WHERE "good_jobs"."locked_by_id" = $3[0m  [["locked_by_id", nil], ["locked_at", nil], ["locked_by_id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mGoodJob::Process Destroy (1.7ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "428c4d96-dcb4-4e48-aeb8-80e4f21de7b0"]]
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Process Create (4.5ms)[0m  [1m[32mINSERT INTO "good_job_processes" ("id", "created_at", "updated_at", "state", "lock_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id", "3d909eb1-962e-4754-8a63-3766f7d9c75b"], ["created_at", "2026-01-20 11:00:23.322909"], ["updated_at", "2026-01-20 11:00:23.322909"], ["state", "{\"hostname\":\"Renato-Hivelocity-M3.local\",\"pid\":67547,\"memory\":107692,\"proctitle\":\"./bin/rails\",\"preserve_job_records\":true,\"retry_on_unhandled_error\":false,\"schedulers\":[{\"name\":\"GoodJob::Scheduler(queues=* max_threads=5)\",\"queues\":\"*\",\"max_threads\":5,\"active_threads\":1,\"available_threads\":4,\"max_cache\":10000,\"active_cache\":0,\"available_cache\":10000,\"empty_executions_count\":0,\"errored_executions_count\":0,\"succeeded_executions_count\":0,\"total_executions_count\":0,\"execution_at\":null,\"check_queue_at\":null}],\"cron_enabled\":false,\"total_succeeded_executions_count\":0,\"total_errored_executions_count\":0,\"database_connection_pool\":{\"size\":5,\"active\":2}}"], ["lock_type", 0]]
+  [1m[36mGoodJob::Lockable Advisory Lock (3.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS locked[0m  [["key", "good_job_processes-3d909eb1-962e-4754-8a63-3766f7d9c75b"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (2.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mGoodJob::Job Load (7.1ms)[0m  [1m[34mSELECT "good_jobs"."id", "good_jobs"."queue_name", "good_jobs"."priority", "good_jobs"."serialized_params", "good_jobs"."scheduled_at", "good_jobs"."performed_at", "good_jobs"."finished_at", "good_jobs"."error", "good_jobs"."created_at", "good_jobs"."updated_at", "good_jobs"."active_job_id", "good_jobs"."concurrency_key", "good_jobs"."cron_key", "good_jobs"."cron_at", "good_jobs"."batch_id", "good_jobs"."batch_callback_id", "good_jobs"."executions_count", "good_jobs"."job_class", "good_jobs"."error_event", "good_jobs"."labels", "good_jobs"."locked_by_id", "good_jobs"."locked_at" FROM "good_jobs" WHERE "good_jobs"."id" IN (WITH "rows" AS  MATERIALIZED (SELECT "good_jobs"."id" FROM "good_jobs" WHERE "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" <= $1 ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC) SELECT "rows"."id" FROM "rows" WHERE pg_try_advisory_lock(('x' || substr(md5('good_jobs' || '-' || "rows"."id"::text), 1, 16))::bit(64)::bigint) LIMIT $2) ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC[0m  [["scheduled_at", "2026-01-20 11:00:23.343037"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (2.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (5.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.7ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (1.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 194)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 4.5ms | Allocations: 7080)
+  Rendered habits/_form.html.erb (Duration: 5.7ms | Allocations: 3738)
+  Rendered habits/_form_modal.html.erb (Duration: 6.3ms | Allocations: 4103)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 12.9ms | Allocations: 12621)
+  Rendered layout layouts/application.html.erb (Duration: 50.8ms | Allocations: 71029)
+Completed 200 OK in 179ms (Views: 52.7ms | ActiveRecord: 57.6ms | Allocations: 123117)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:01:59 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.3ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 17.6ms | Allocations: 9008)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 19.3ms | Allocations: 9906)
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | Allocations: 9992)
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 4.0ms | Allocations: 20923)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `checked_in' for #<ActionView::Base:0x0000000000d930>
+
+             class: "relative aspect-square rounded-xl border-2 transition-all duration-200 transform hover:scale-110 #{checked_in ? 'bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-600 text-white shadow-md' : 'bg-white border-gray-300 text-gray-600 hover:border-indigo-400 hover:bg-indigo-50'}",
+                                                                                                                        ^^^^^^^^^^
+Did you mean?  check_box):
+    58:         <% button_options = {
+    59:              method: :post,
+    60:              data: { controller: "hold-confirm", action: "mousedown->hold-confirm#start touchstart->hold-confirm#start" },
+    61:              class: "relative aspect-square rounded-xl border-2 transition-all duration-200 transform hover:scale-110 #{checked_in ? 'bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-600 text-white shadow-md' : 'bg-white border-gray-300 text-gray-600 hover:border-indigo-400 hover:bg-indigo-50'}",
+    62:              form_class: "inline"
+    63:            } %>
+    64:         <%= button_to toggle_checkin_path(habit_data[:habit], date: date), button_options do %>
+  
+app/views/habits/_habit_card.html.erb:61
+app/views/habits/_habit_card.html.erb:55:in `reverse_each'
+app/views/habits/_habit_card.html.erb:55
+app/views/dashboard/show.html.erb:18
+Started GET "/" for ::1 at 2026-01-20 08:02:03 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (1.1ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.9ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.3ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.0ms | Allocations: 6878)
+  Rendered habits/_form.html.erb (Duration: 4.7ms | Allocations: 2347)
+  Rendered habits/_form_modal.html.erb (Duration: 5.9ms | Allocations: 2692)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 14.1ms | Allocations: 10567)
+  Rendered layout layouts/application.html.erb (Duration: 19.4ms | Allocations: 14152)
+Completed 200 OK in 47ms (Views: 21.2ms | ActiveRecord: 8.5ms | Allocations: 25200)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:02:40 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.3ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 7.2ms | Allocations: 6554)
+  Rendered habits/_form.html.erb (Duration: 4.6ms | Allocations: 2241)
+  Rendered habits/_form_modal.html.erb (Duration: 5.5ms | Allocations: 2599)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 15.3ms | Allocations: 10263)
+  Rendered layout layouts/application.html.erb (Duration: 21.5ms | Allocations: 13856)
+Completed 200 OK in 62ms (Views: 23.6ms | ActiveRecord: 5.9ms | Allocations: 24729)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:02:45 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 7.8ms | Allocations: 6878)
+  Rendered habits/_form.html.erb (Duration: 4.4ms | Allocations: 2248)
+  Rendered habits/_form_modal.html.erb (Duration: 5.2ms | Allocations: 2591)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 15.4ms | Allocations: 10462)
+  Rendered layout layouts/application.html.erb (Duration: 19.3ms | Allocations: 13808)
+Completed 200 OK in 52ms (Views: 21.2ms | ActiveRecord: 5.9ms | Allocations: 24799)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:02:54 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.8ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.7ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.7ms | Allocations: 6879)
+  Rendered habits/_form.html.erb (Duration: 4.7ms | Allocations: 2248)
+  Rendered habits/_form_modal.html.erb (Duration: 5.7ms | Allocations: 2592)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 15.1ms | Allocations: 10464)
+  Rendered layout layouts/application.html.erb (Duration: 19.0ms | Allocations: 13809)
+Completed 200 OK in 51ms (Views: 20.7ms | ActiveRecord: 7.6ms | Allocations: 24780)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:03:20 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (2.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.4ms | Allocations: 6858)
+  Rendered habits/_form.html.erb (Duration: 4.6ms | Allocations: 2247)
+  Rendered habits/_form_modal.html.erb (Duration: 5.4ms | Allocations: 2590)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 14.9ms | Allocations: 10441)
+  Rendered layout layouts/application.html.erb (Duration: 19.3ms | Allocations: 13792)
+Completed 200 OK in 51ms (Views: 21.5ms | ActiveRecord: 6.6ms | Allocations: 24621)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:03:44 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.7ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.7ms | Allocations: 6879)
+  Rendered habits/_form.html.erb (Duration: 4.7ms | Allocations: 2248)
+  Rendered habits/_form_modal.html.erb (Duration: 5.9ms | Allocations: 2591)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 15.2ms | Allocations: 10468)
+  Rendered layout layouts/application.html.erb (Duration: 19.8ms | Allocations: 13819)
+Completed 200 OK in 60ms (Views: 22.4ms | ActiveRecord: 7.0ms | Allocations: 24655)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:03:52 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.4ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 8.5ms | Allocations: 6834)
+  Rendered habits/_form.html.erb (Duration: 4.7ms | Allocations: 2247)
+  Rendered habits/_form_modal.html.erb (Duration: 5.5ms | Allocations: 2590)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 16.2ms | Allocations: 10417)
+  Rendered layout layouts/application.html.erb (Duration: 21.0ms | Allocations: 13762)
+Completed 200 OK in 49ms (Views: 23.0ms | ActiveRecord: 5.7ms | Allocations: 24729)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:04:04 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 2.0ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 21.3ms | Allocations: 6879)
+  Rendered habits/_form.html.erb (Duration: 9.0ms | Allocations: 2247)
+  Rendered habits/_form_modal.html.erb (Duration: 10.4ms | Allocations: 2590)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 41.4ms | Allocations: 10463)
+  Rendered layout layouts/application.html.erb (Duration: 46.8ms | Allocations: 13808)
+Completed 200 OK in 85ms (Views: 57.0ms | ActiveRecord: 6.9ms | Allocations: 24647)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:04:07 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.9ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.6ms | Allocations: 174)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.5ms | Allocations: 6878)
+  Rendered habits/_form.html.erb (Duration: 4.7ms | Allocations: 2247)
+  Rendered habits/_form_modal.html.erb (Duration: 5.5ms | Allocations: 2590)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 14.6ms | Allocations: 10461)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | Allocations: 13812)
+Completed 200 OK in 48ms (Views: 19.7ms | ActiveRecord: 5.4ms | Allocations: 24801)
+
+
+Started POST "/habits/3/toggle_checkin?date=2026-01-13" for ::1 at 2026-01-20 08:04:09 -0300
+Processing by CheckinsController#toggle as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "date"=>"2026-01-13", "habit_id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:37:in `set_habit'
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" = $2 LIMIT $3[0m  [["habit_id", 3], ["occurred_on", "2026-01-13"], ["LIMIT", 1]]
+  ↳ app/controllers/checkins_controller.rb:8:in `toggle'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mCheckin Destroy (1.8ms)[0m  [1m[31mDELETE FROM "checkins" WHERE "checkins"."id" = $1[0m  [["id", 26]]
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/checkins_controller.rb:11:in `toggle'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering checkins/toggle.turbo_stream.erb
+  Rendered dashboard/_header.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered habits/_habit_card.html.erb (Duration: 3.0ms | Allocations: 2808)
+  Rendered checkins/toggle.turbo_stream.erb (Duration: 6.5ms | Allocations: 3799)
+Completed 200 OK in 57ms (Views: 8.6ms | ActiveRecord: 10.2ms | Allocations: 18489)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2026-01-20 08:04:10 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/habits/new" for ::1 at 2026-01-20 08:04:11 -0300
+Processing by HabitsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/new.html.erb within layouts/application
+  Rendered habits/_form.html.erb (Duration: 2.7ms | Allocations: 1807)
+  Rendered habits/new.html.erb within layouts/application (Duration: 4.4ms | Allocations: 2124)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 4825)
+Completed 200 OK in 16ms (Views: 10.7ms | ActiveRecord: 0.5ms | Allocations: 6897)
+
+
+Started GET "/habits/3/archive" for ::1 at 2026-01-20 08:06:04 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/habits/3/archive"):
+  
+Started GET "/" for ::1 at 2026-01-20 08:06:07 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.9ms | Allocations: 6224)
+  Rendered habits/_form.html.erb (Duration: 1.3ms | Allocations: 1561)
+  Rendered habits/_form_modal.html.erb (Duration: 1.5ms | Allocations: 1670)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 7.8ms | Allocations: 8157)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 10643)
+Completed 200 OK in 33ms (Views: 10.8ms | ActiveRecord: 3.9ms | Allocations: 20669)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2026-01-20 08:06:07 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for ::1 at 2026-01-20 08:06:08 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (1.0ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (1.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.9ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb
+  Rendering dashboard/show.html.erb within layouts/turbo_rails/frame
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.7ms | Allocations: 6210)
+  Rendered habits/_form.html.erb (Duration: 2.3ms | Allocations: 1556)
+  Rendered habits/_form_modal.html.erb (Duration: 2.5ms | Allocations: 1665)
+  Rendered dashboard/show.html.erb within layouts/turbo_rails/frame (Duration: 8.9ms | Allocations: 8138)
+  Rendered layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb (Duration: 9.8ms | Allocations: 8359)
+Completed 200 OK in 48ms (Views: 10.9ms | ActiveRecord: 8.2ms | Allocations: 18498)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:06:13 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb
+  Rendering dashboard/show.html.erb within layouts/turbo_rails/frame
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.5ms | Allocations: 6210)
+  Rendered habits/_form.html.erb (Duration: 1.3ms | Allocations: 1556)
+  Rendered habits/_form_modal.html.erb (Duration: 1.7ms | Allocations: 1665)
+  Rendered dashboard/show.html.erb within layouts/turbo_rails/frame (Duration: 7.6ms | Allocations: 8138)
+  Rendered layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb (Duration: 7.8ms | Allocations: 8229)
+Completed 200 OK in 33ms (Views: 8.0ms | ActiveRecord: 5.4ms | Allocations: 18097)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:06:16 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb
+  Rendering dashboard/show.html.erb within layouts/turbo_rails/frame
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 4.1ms | Allocations: 6210)
+  Rendered habits/_form.html.erb (Duration: 1.4ms | Allocations: 1556)
+  Rendered habits/_form_modal.html.erb (Duration: 1.5ms | Allocations: 1665)
+  Rendered dashboard/show.html.erb within layouts/turbo_rails/frame (Duration: 6.1ms | Allocations: 8138)
+  Rendered layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb (Duration: 6.2ms | Allocations: 8229)
+Completed 200 OK in 32ms (Views: 6.5ms | ActiveRecord: 5.1ms | Allocations: 18121)
+
+
+Started GET "/" for ::1 at 2026-01-20 08:06:18 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (1.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-13"], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-19')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-13')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-19"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 6.1ms | Allocations: 6210)
+  Rendered habits/_form.html.erb (Duration: 1.5ms | Allocations: 1556)
+  Rendered habits/_form_modal.html.erb (Duration: 1.7ms | Allocations: 1665)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 8.7ms | Allocations: 8138)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | Allocations: 10624)
+Completed 200 OK in 34ms (Views: 11.7ms | ActiveRecord: 5.0ms | Allocations: 20526)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2026-01-20 08:06:18 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  

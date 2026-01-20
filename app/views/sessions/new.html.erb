@@ -1,20 +1,71 @@
-<div class="max-w-md mx-auto mt-12">
-  <h1 class="text-3xl font-bold mb-6 text-center">Sign In</h1>
-
-  <%= form_with url: sign_in_path, class: "bg-white rounded-lg shadow-md p-8" do |form| %>
-    <div class="mb-4">
-      <%= form.label :email, class: "block text-gray-700 font-medium mb-2" %>
-      <%= form.email_field :email, required: true, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+<div class="min-h-screen flex items-center justify-center px-4 py-12">
+  <div class="max-w-md w-full mx-auto">
+    <!-- Logo and Header -->
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl shadow-2xl mb-6 transform hover:scale-105 transition-transform duration-300">
+        <span class="text-white font-bold text-3xl">S</span>
+      </div>
+      <h1 class="text-5xl font-bold mb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+        Welcome Back
+      </h1>
+      <p class="text-gray-600 text-lg">Sign in to continue building your habits</p>
     </div>
 
-    <div class="mb-6">
-      <%= form.label :password, class: "block text-gray-700 font-medium mb-2" %>
-      <%= form.password_field :password, required: true, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
-    </div>
+    <!-- Login Form -->
+    <%= form_with url: sign_in_path, class: "bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-200/50 p-8 space-y-6" do |form| %>
+      <div>
+        <%= form.label :email, class: "block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide" %>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+          </div>
+          <%= form.email_field :email, required: true, placeholder: "you@example.com", class: "w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white hover:border-gray-300" %>
+        </div>
+      </div>
 
-    <div class="flex items-center justify-between">
-      <%= form.submit "Sign In", class: "bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
-      <%= link_to "Sign Up", sign_up_path, class: "text-indigo-600 hover:text-indigo-800" %>
+      <div>
+        <%= form.label :password, class: "block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide" %>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <%= form.password_field :password, required: true, placeholder: "••••••••", class: "w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white hover:border-gray-300" %>
+        </div>
+      </div>
+
+      <div class="pt-2 space-y-4">
+        <%= form.submit "Sign In", class: "w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-6 py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-bold text-lg shadow-lg" %>
+
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-white text-gray-500">New to Streaky?</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= link_to sign_up_path, class: "inline-flex items-center justify-center w-full px-6 py-3.5 border-2 border-indigo-200 text-indigo-700 rounded-xl hover:bg-indigo-50 hover:border-indigo-300 transform hover:scale-[1.02] transition-all duration-200 font-semibold" do %>
+            <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+            </svg>
+            Create Account
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Decorative Elements -->
+    <div class="mt-8 text-center">
+      <p class="text-xs text-gray-500">
+        By signing in, you agree to our terms of service
+      </p>
     </div>
-  <% end %>
+  </div>
 </div>

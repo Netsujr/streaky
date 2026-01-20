@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  layout "authentication"
   skip_before_action :require_authentication, only: [:new, :create]
   before_action :skip_authentication, only: [:new, :create]
 
