@@ -3,30 +3,30 @@
     <h1 class="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">Dashboard</h1>
     <p class="text-sm sm:text-base text-gray-600">Track your progress and build lasting habits</p>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl p-5 sm:p-6 text-white transform hover:scale-[1.02] transition-transform duration-200">
+  <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 max-w-4xl">
+    <div class="flex-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl p-4 sm:p-5 lg:p-6 text-white transform hover:scale-[1.02] transition-transform duration-200">
       <div class="flex items-center justify-between mb-2">
         <p class="text-indigo-100 text-xs sm:text-sm font-medium uppercase tracking-wide">Today's Completion</p>
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 flex items-center justify-center">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
         </div>
       </div>
-      <p class="text-4xl sm:text-5xl font-bold"><%= dashboard_data[:today_completion_count] %></p>
-      <p class="text-indigo-100 text-xs sm:text-sm mt-2">Habits completed today</p>
+      <p class="text-3xl sm:text-4xl lg:text-5xl font-bold"><%= dashboard_data[:today_completion_count] %></p>
+      <p class="text-indigo-100 text-xs sm:text-sm mt-1 sm:mt-2">Habits completed today</p>
     </div>
-    <div class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-xl p-5 sm:p-6 text-white transform hover:scale-[1.02] transition-transform duration-200">
+    <div class="flex-1 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-xl p-4 sm:p-5 lg:p-6 text-white transform hover:scale-[1.02] transition-transform duration-200">
       <div class="flex items-center justify-between mb-2">
         <p class="text-blue-100 text-xs sm:text-sm font-medium uppercase tracking-wide">Active Habits</p>
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 flex items-center justify-center">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
           </svg>
         </div>
       </div>
-      <p class="text-4xl sm:text-5xl font-bold"><%= dashboard_data[:habits].count %></p>
-      <p class="text-blue-100 text-xs sm:text-sm mt-2">Habits you're tracking</p>
+      <p class="text-3xl sm:text-4xl lg:text-5xl font-bold"><%= dashboard_data[:habits].count %></p>
+      <p class="text-blue-100 text-xs sm:text-sm mt-1 sm:mt-2">Habits you're tracking</p>
     </div>
   </div>
 </div>

@@ -5,3 +5,10 @@
     <%= render "habits/form", habit: @habit %>
   <% end %>
 </div>
+
+<script>
+  // If we're on the new page (not in modal), redirect to dashboard with modal
+  if (!document.getElementById('habit-form-modal')) {
+    window.location.href = '/';
+  }
+</script>

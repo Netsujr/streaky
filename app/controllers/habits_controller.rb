@@ -14,18 +14,28 @@ class HabitsController < ApplicationController
 
   def new
     @habit = current_user.habits.build
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def create
     @habit = current_user.habits.build(habit_params)
 
     if @habit.save
+      # Prepare dashboard data for turbo_stream response
+      @dashboard_data = HabitsDashboardQuery.new(current_user).call
+
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Habit created!" }
         format.turbo_stream
       end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

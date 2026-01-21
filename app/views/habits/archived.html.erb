@@ -51,6 +51,18 @@
                 class: "px-3 sm:px-4 py-2.5 sm:py-2 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg transition-colors font-medium text-sm sm:text-base touch-manipulation min-h-[44px] flex items-center justify-center" do %>
               Restore
             <% end %>
+            <%= link_to "#",
+                data: {
+                  controller: "confirmation-modal",
+                  action: "click->confirmation-modal#show",
+                  confirm_title: "Delete Habit",
+                  confirm_message: "Are you sure you want to permanently delete '#{habit.name}'? This action cannot be undone and will delete all associated check-ins.",
+                  url: habit_path(habit),
+                  method: "delete"
+                },
+                class: "px-3 sm:px-4 py-2.5 sm:py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors font-medium text-sm sm:text-base touch-manipulation min-h-[44px] flex items-center justify-center" do %>
+              Delete
+            <% end %>
           </div>
         </div>
       <% end %>

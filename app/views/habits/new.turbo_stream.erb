@@ -1,0 +1,11 @@
+<%= turbo_stream.update "habit_form" do %>
+  <%= render "habits/form", habit: @habit %>
+<% end %>
+
+<script>
+  // Show the modal when form loads
+  const modal = document.getElementById('habit-form-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+  }
+</script>
