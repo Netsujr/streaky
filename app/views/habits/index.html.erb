@@ -4,12 +4,20 @@
       <h1 class="text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">Habits</h1>
       <p class="text-gray-600 mt-1">Manage all your habits in one place</p>
     </div>
-    <%= link_to new_habit_path, class: "group inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-medium" do %>
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-      </svg>
-      <span>New Habit</span>
-    <% end %>
+    <div class="flex items-center space-x-3">
+      <%= link_to archived_habits_path, class: "inline-flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors font-medium" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+        </svg>
+        <span>Archived</span>
+      <% end %>
+      <%= link_to new_habit_path, class: "group inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-medium" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span>New Habit</span>
+      <% end %>
+    </div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -30,7 +38,16 @@
           <%= link_to habit_path(habit), class: "flex-1 text-center px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 font-medium transition-colors" do %>
             View
           <% end %>
-          <%= link_to archive_habit_path(habit), method: :patch, data: { confirm: "Are you sure?" }, class: "px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" do %>
+          <%= link_to "#",
+              data: {
+                controller: "confirmation-modal",
+                action: "click->confirmation-modal#show",
+                confirm_title: "Archive Habit",
+                confirm_message: "Are you sure you want to archive '#{habit.name}'? You can restore it later from the Archived page.",
+                url: archive_habit_path(habit),
+                method: "patch"
+              },
+              class: "px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" do %>
             Archive
           <% end %>
         </div>

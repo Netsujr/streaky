@@ -13,7 +13,16 @@
       <%= turbo_frame_tag "habit_name_#{habit_data[:habit].id}_edit", target: "_top" do %>
       <% end %>
     </div>
-    <%= link_to archive_habit_path(habit_data[:habit]), method: :patch, data: { confirm: "Are you sure?" }, class: "p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors" do %>
+    <%= link_to "#",
+        data: {
+          controller: "confirmation-modal",
+          action: "click->confirmation-modal#show",
+          confirm_title: "Archive Habit",
+          confirm_message: "Are you sure you want to archive '#{habit_data[:habit].name}'? You can restore it later from the Archived page.",
+          url: archive_habit_path(habit_data[:habit]),
+          method: "patch"
+        },
+        class: "p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors" do %>
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
       </svg>

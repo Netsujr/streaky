@@ -5,6 +5,10 @@ class HabitsController < ApplicationController
     @habits = current_user.habits.active.order(created_at: :desc)
   end
 
+  def archived
+    @habits = current_user.habits.archived.order(archived_at: :desc)
+  end
+
   def show
   end
 
@@ -42,14 +46,21 @@ class HabitsController < ApplicationController
   end
 
   def archive
-    @habit.archive!
-    redirect_to root_path, notice: "Habit archived!"
+    if @habit.archived?
+      @habit.update_column(:archived_at, nil)
+      @habit.reload
+      redirect_to habits_path, notice: "Habit restored!"
+    else
+      @habit.update_column(:archived_at, Time.current)
+      @habit.reload
+      redirect_to request.referer || root_path, notice: "Habit archived!"
+    end
   end
 
   private
 
   def set_habit
-    @habit = current_user.habits.find(params[:id])
+    @habit = Habit.where(user: current_user).find(params[:id])
   end
 
   def habit_params

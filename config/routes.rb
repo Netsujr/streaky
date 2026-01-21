@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     member do
       patch :archive
     end
+    collection do
+      get :archived
+    end
     resources :checkins, only: [] do
       collection do
         post :toggle
