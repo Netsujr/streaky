@@ -5,14 +5,14 @@
       <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl shadow-2xl mb-6 transform hover:scale-105 transition-transform duration-300">
         <span class="text-white font-bold text-3xl">S</span>
       </div>
-      <h1 class="text-5xl font-bold mb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
         Welcome Back
       </h1>
-      <p class="text-gray-600 text-lg">Sign in to continue building your habits</p>
+      <p class="text-gray-600 text-base sm:text-lg">Sign in to continue building your habits</p>
     </div>
 
     <!-- Login Form -->
-    <%= form_with url: sign_in_path, class: "bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-200/50 p-8 space-y-6" do |form| %>
+    <%= form_with url: sign_in_path, class: "bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-200/50 p-5 sm:p-6 lg:p-8 space-y-5 sm:space-y-6" do |form| %>
       <div>
         <%= form.label :email, class: "block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide" %>
         <div class="relative">
@@ -39,7 +39,7 @@
       </div>
 
       <div class="pt-2 space-y-4">
-        <%= form.submit "Sign In", class: "w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-6 py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-bold text-lg shadow-lg" %>
+        <%= form.submit "Sign In", class: "w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-6 py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-bold text-base sm:text-lg shadow-lg touch-manipulation min-h-[44px]" %>
 
         <div class="relative">
           <div class="absolute inset-0 flex items-center">

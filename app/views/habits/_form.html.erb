@@ -61,8 +61,8 @@
     <p class="mt-1 text-xs text-gray-500">Choose a color to help identify this habit</p>
   </div>
 
-  <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
-    <%= link_to "Cancel", root_path, class: "px-6 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl font-medium transition-colors" %>
-    <%= form.submit habit&.persisted? ? "Update Habit" : "Create Habit", class: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-semibold" %>
+  <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3 sm:space-x-3 pt-4 border-t border-gray-200">
+    <%= link_to "Cancel", root_path, class: "w-full sm:w-auto text-center px-6 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl font-medium transition-colors text-sm sm:text-base touch-manipulation min-h-[44px] flex items-center justify-center" %>
+    <%= form.submit habit&.persisted? ? "Update Habit" : "Create Habit", class: "w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-semibold text-sm sm:text-base touch-manipulation min-h-[44px]" %>
   </div>
 <% end %>
