@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "habit_form" do %>
+  <%= render "habits/form", habit: @habit %>
+<% end %>
+
+<script>
+  // Open modal when edit form loads
+  const modal = document.getElementById('habit-form-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+  }
+</script>

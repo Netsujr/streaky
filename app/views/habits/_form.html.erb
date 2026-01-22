@@ -30,7 +30,7 @@
     <%= form.label :goal_per_week, "Goal per week (days)", class: "block text-gray-700 font-semibold mb-2 text-sm" %>
     <%= form.number_field :goal_per_week,
                           in: 1..7,
-                          default: 7,
+                          value: habit&.goal_per_week || 7,
                           class: "w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white" %>
     <p class="mt-1 text-xs text-gray-500">How many days per week do you want to complete this habit?</p>
   </div>
@@ -38,7 +38,7 @@
   <div class="mb-5">
     <%= form.label :start_date, class: "block text-gray-700 font-semibold mb-2 text-sm" %>
     <%= form.date_field :start_date,
-                        value: Time.use_zone(current_user.timezone) { Time.zone.today },
+                        value: habit&.start_date || Time.use_zone(current_user.timezone) { Time.zone.today },
                         class: "w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white" %>
   </div>
 

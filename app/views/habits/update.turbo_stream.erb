@@ -1,0 +1,36 @@
+<%= turbo_stream.update "habit_form" do %>
+  <div class="text-center py-8">
+    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full flex items-center justify-center">
+      <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 mb-2">Habit updated!</h3>
+    <p class="text-sm text-gray-600 mb-4">Your habit has been updated successfully.</p>
+    <button type="button" onclick="document.getElementById('habit-form-modal').classList.add('hidden'); window.location.reload();" class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-semibold text-sm touch-manipulation min-h-[44px]">
+      Close
+    </button>
+  </div>
+<% end %>
+
+<%= turbo_stream.append "flash" do %>
+  <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-2xl backdrop-blur-sm border border-white/20 transform transition-all duration-300">
+    <div class="flex items-center space-x-3">
+      <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      </svg>
+      <p class="font-medium text-sm sm:text-base">Habit updated!</p>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  // Close modal and reload after showing success
+  setTimeout(function() {
+    const modal = document.getElementById('habit-form-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+    window.location.reload();
+  }, 1500);
+</script>

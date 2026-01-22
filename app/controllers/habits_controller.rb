@@ -12,6 +12,13 @@ class HabitsController < ApplicationController
   def show
   end
 
+  def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
+
   def new
     @habit = current_user.habits.build
     respond_to do |format|
@@ -46,7 +53,10 @@ class HabitsController < ApplicationController
         format.turbo_stream
       end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 

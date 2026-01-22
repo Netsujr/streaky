@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/settings", to: "settings#show"
   patch "/settings", to: "settings#update"
 
-  resources :habits, except: [:edit] do
+  resources :habits do
     member do
       patch :archive
     end

@@ -8,7 +8,7 @@
           <% end %>
           <h3 class="text-lg sm:text-xl font-bold text-gray-900 truncate"><%= habit_data[:habit].name %></h3>
         </div>
-        <%= link_to "Edit", "#", data: { turbo_frame: "habit_name_#{habit_data[:habit].id}" }, class: "text-xs sm:text-sm text-indigo-600 hover:text-indigo-700 font-medium touch-manipulation" %>
+        <%= link_to "Edit", edit_habit_path(habit_data[:habit]), data: { turbo_frame: "habit_form" }, onclick: "const modal = document.getElementById('habit-form-modal'); if (modal) modal.classList.remove('hidden');", class: "text-xs sm:text-sm text-indigo-600 hover:text-indigo-700 font-medium touch-manipulation" %>
       <% end %>
       <%= turbo_frame_tag "habit_name_#{habit_data[:habit].id}_edit", target: "_top" do %>
       <% end %>
