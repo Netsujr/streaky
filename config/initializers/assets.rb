@@ -1,12 +1,10 @@
-# Be sure to restart your server when you modify this file.
+# be sure to restart the servert when you change this file
 
-# Version of your assets, change this if you want to expire all your assets.
+# bump this if you want to expire all assets (https://guides.rubyonrails.org/asset_pipeline.html)
 Rails.application.config.assets.version = "1.0"
 
-# Add additional assets to the asset load path.
+# add more paths here if needed
 # Rails.application.config.assets.paths << Emoji.images_path
 
-# Precompile additional assets.
-# application.js, application.css, and all non-JS/CSS in the app/assets
-# folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+# precompile tailwind build output so rails serves it in prod
+Rails.application.config.assets.precompile += %w( tailwind.css )

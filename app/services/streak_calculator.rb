@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Facade for streak and completion metrics. Delegates to single-responsibility components.
+# See: StreakCalculator::CheckedInDates, CurrentStreak, LongestStreak, CompletionRate.
 class StreakCalculator
   attr_reader :habit, :reference_date, :user_timezone
 
@@ -8,69 +12,34 @@ class StreakCalculator
   end
 
   def current_streak_days
-    return 0 if checked_in_dates.empty?
-
-    days = 0
-    date = reference_date
-
-    while checked_in_dates.include?(date)
-      days += 1
-      date = date - 1.day
-    end
-
-    days
+    CurrentStreak.call(checked_in_dates, reference_date)
   end
 
   def longest_streak_days
-    return 0 if checked_in_dates.empty?
-
-    longest = 0
-    current = 0
-    sorted_dates = checked_in_dates.sort
-
-    sorted_dates.each_with_index do |date, index|
-      if index == 0 || sorted_dates[index - 1] == date - 1.day
-        current += 1
-        longest = current if current > longest
-      else
-        current = 1
-      end
-    end
-
-    longest
+    LongestStreak.call(checked_in_dates)
   end
 
   def checked_in_dates_set(last_n_days: 7)
-    start_date = reference_date - (last_n_days - 1).days
-    checkin_dates = Checkin.where(habit: habit)
-                           .where("occurred_on >= ?", start_date)
-                           .pluck(:occurred_on)
-                           .to_set
-    Set.new((start_date..reference_date).select { |d| checkin_dates.include?(d) })
+    date_loader.in_range(last_n_days: last_n_days)
   end
 
   def checked_in_dates
-    @checked_in_dates ||= Checkin.where(habit: habit)
-                                  .where("occurred_on <= ?", reference_date)
-                                  .pluck(:occurred_on)
-                                  .to_set
+    date_loader.all
   end
 
   def completion_rate_last_7_days
-    dates = checked_in_dates_set(last_n_days: 7)
-    return 0 if dates.empty?
-
-    start_date = reference_date - 6.days
-    habit_start = habit.start_date
-    effective_start = habit_start > start_date ? habit_start : start_date
-    days_in_range = (effective_start..reference_date).count
-
-    return 0 if days_in_range.zero?
-
-    (dates.count.to_f / days_in_range * 100).to_i
+    CompletionRate.call(habit, checked_in_dates_set(last_n_days: 7), reference_date, last_n_days: 7)
   end
 
   private
+
+  def date_loader
+    @date_loader ||= CheckedInDates.new(
+      habit,
+      reference_date: reference_date,
+      user_timezone: user_timezone
+    )
+  end
 
   def today_in_timezone
     Time.use_zone(user_timezone) { Time.zone.today }

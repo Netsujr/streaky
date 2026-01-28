@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class HabitsController < ApplicationController
+  include HabitLoading
+
   before_action :set_habit, only: [:show, :edit, :update, :destroy, :archive]
 
   def index
@@ -13,36 +17,25 @@ class HabitsController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
+    respond_to_habit_form
   end
 
   def new
     @habit = current_user.habits.build
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
+    respond_to_habit_form
   end
 
   def create
     @habit = current_user.habits.build(habit_params)
 
     if @habit.save
-      # Prepare dashboard data for turbo_stream response
       @dashboard_data = HabitsDashboardQuery.new(current_user).call
-
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Habit created!" }
         format.turbo_stream
       end
     else
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
-        format.turbo_stream { render :new, status: :unprocessable_entity }
-      end
+      respond_to_habit_form_with_errors(:new)
     end
   end
 
@@ -53,10 +46,7 @@ class HabitsController < ApplicationController
         format.turbo_stream
       end
     else
-      respond_to do |format|
-        format.html { render :edit, status: :unprocessable_entity }
-        format.turbo_stream { render :edit, status: :unprocessable_entity }
-      end
+      respond_to_habit_form_with_errors(:edit)
     end
   end
 
@@ -66,24 +56,24 @@ class HabitsController < ApplicationController
   end
 
   def archive
-    if @habit.archived?
-      @habit.update_column(:archived_at, nil)
-      @habit.reload
-      redirect_to habits_path, notice: "Habit restored!"
-    else
-      @habit.update_column(:archived_at, Time.current)
-      @habit.reload
-      redirect_to request.referer || root_path, notice: "Habit archived!"
-    end
+    result = Habits::ArchiveService.call(@habit)
+    redirect_path = result[:archived] ? (request.referer || root_path) : habits_path
+    redirect_to redirect_path, notice: result[:notice]
   end
 
   private
 
-  def set_habit
-    @habit = Habit.where(user: current_user).find(params[:id])
+  def respond_to_habit_form
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
-  def habit_params
-    params.require(:habit).permit(:name, :goal_per_week, :start_date, :color)
+  def respond_to_habit_form_with_errors(template)
+    respond_to do |format|
+      format.html { render template, status: :unprocessable_entity }
+      format.turbo_stream { render template, status: :unprocessable_entity }
+    end
   end
 end

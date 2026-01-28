@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="confirmation-modal"
+// connects to data-controller="confirmation-modal" - handles archive/delete/restore confirmations (https://stimulus.hotwired.dev/reference/controllers)
 export default class extends Controller {
   static targets = ["title", "message"]
   static values = {
@@ -9,11 +9,11 @@ export default class extends Controller {
   }
 
   connect() {
-    // Hide modal on ESC key
+    // hide modal on esc key
     this.boundHandleEscape = this.handleEscape.bind(this)
     document.addEventListener("keydown", this.boundHandleEscape)
 
-    // Hide modal when clicking outside
+    // hide modal when clicking outside (backdrop)
     this.boundHandleBackdrop = this.handleBackdrop.bind(this)
     this.element.addEventListener("click", this.boundHandleBackdrop)
   }
@@ -24,21 +24,21 @@ export default class extends Controller {
   }
 
   show(event) {
-    // Prevent default link/button behavior
+    // prevent default link/button behavoir so we dont navigate
     event.preventDefault()
     event.stopPropagation()
 
-    // Get data from the triggering element
+    // get data from the elem that was clicked (title, message, url, method)
     const trigger = event.currentTarget
     this.lastTrigger = trigger // Store for focus return
 
-    // Rails converts data-url to dataset.url, data-confirm-title to dataset.confirmTitle, etc.
+    // rails converts data-* to dataset - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
     const title = trigger.dataset.confirmTitle || trigger.getAttribute("data-confirm-title") || "Confirm Action"
     const message = trigger.dataset.confirmMessage || trigger.getAttribute("data-confirm-message") || "Are you sure you want to proceed?"
     const url = trigger.dataset.url || trigger.getAttribute("data-url") || trigger.href || this.confirmUrlValue
     const method = trigger.dataset.method || trigger.getAttribute("data-method") || trigger.dataset.turboMethod || trigger.getAttribute("data-turbo-method") || this.confirmMethodValue || "get"
 
-    // Debug logging
+    // debug logging (can remove in prod)
     console.log("Modal show triggered:", { title, message, url, method })
     console.log("Trigger element dataset:", trigger.dataset)
     console.log("Trigger href:", trigger.href)
@@ -51,7 +51,7 @@ export default class extends Controller {
       return
     }
 
-    // Find the modal element (it has id="confirmation-modal" and data-controller="confirmation-modal")
+    // find the actual modal dom node (id=confirmation-modal) - we use this instead of this.element bc the controller might be on the trigger link
     const modalElement = document.getElementById("confirmation-modal")
     if (!modalElement) {
       console.error("Modal element not found in DOM")
@@ -59,14 +59,13 @@ export default class extends Controller {
       return
     }
 
-    // Store the action data on the modal element itself so any controller instance can access it
-    // Use setAttribute to ensure it's stored correctly
+    // store url/method on the modal itself so when confirm btn is clicked we can read it (trigger and modal have diff controller instances)
     modalElement.setAttribute("data-confirm-url", url)
     modalElement.setAttribute("data-confirm-method", method)
     console.log("Stored action data on modal:", { url, method })
     console.log("Modal dataset after storage:", modalElement.dataset)
 
-    // Update modal content - need to find targets within the modal element
+    // update the title and message text in the modal
     const titleTarget = modalElement.querySelector('[data-confirmation-modal-target="title"]')
     const messageTarget = modalElement.querySelector('[data-confirmation-modal-target="message"]')
 
@@ -77,7 +76,7 @@ export default class extends Controller {
       messageTarget.textContent = message
     }
 
-    // Show modal
+    // show modal and lock body scroll
     console.log("Modal element before show:", modalElement)
     console.log("Modal has 'hidden' class:", modalElement.classList.contains("hidden"))
     modalElement.classList.remove("hidden")
@@ -85,7 +84,7 @@ export default class extends Controller {
     console.log("Modal computed display:", window.getComputedStyle(modalElement).display)
     document.body.style.overflow = "hidden" // Prevent background scrolling
 
-    // Focus the confirm button for accessibility
+    // focus confirm button for accessability (keyboard users)
     setTimeout(() => {
       const confirmButton = modalElement.querySelector('button[data-action*="confirm"]')
       if (confirmButton) {
@@ -101,9 +100,9 @@ export default class extends Controller {
     if (modalElement) {
       modalElement.classList.add("hidden")
     }
-    document.body.style.overflow = "" // Restore scrolling
+    document.body.style.overflow = "" // restore scrolling
 
-    // Return focus to the trigger element
+    // return focus to whatever opened the modal
     if (this.lastTrigger) {
       setTimeout(() => {
         this.lastTrigger.focus()
@@ -113,7 +112,7 @@ export default class extends Controller {
   }
 
   confirm() {
-    // Get the action data from the modal element (stored by the show method)
+    // get url/method from modal (was stored there in show()) - then build a form and submit so we get a proper redirect
     const modalElement = document.getElementById("confirmation-modal")
     if (!modalElement) {
       console.error("Modal element not found")
@@ -139,7 +138,7 @@ export default class extends Controller {
 
     console.log("Confirming action:", { url, method })
 
-    // Validate URL again
+    // double check url before we submit
     if (!url || url === "#" || url === window.location.href + "#") {
       console.error("Invalid URL in confirm:", url)
       alert("Error: Invalid action URL. Please refresh the page and try again.")
@@ -147,15 +146,15 @@ export default class extends Controller {
       return
     }
 
-    // Hide modal first
+    // hide modal first
     this.hide()
 
-    // Create a form for submission
+    // create a form and submit it (so rails gets a real post with csrf - https://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
     const form = document.createElement("form")
     form.method = "post"
     form.action = url
     form.style.display = "none"
-    // Explicitly disable Turbo to ensure full page submission
+    // disable turbo so we get a full page reload and the redirect works (otherwise turbo might intercept)
     form.setAttribute("data-turbo", "false")
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
@@ -165,14 +164,14 @@ export default class extends Controller {
       return
     }
 
-    // Add CSRF token
+    // add csrf token or rails will reject it
     const csrfInput = document.createElement("input")
     csrfInput.type = "hidden"
     csrfInput.name = "authenticity_token"
     csrfInput.value = csrfToken
     form.appendChild(csrfInput)
 
-    // Add method override for PATCH/DELETE
+    // add _method for patch/delete (rails convention)
     const methodValue = method ? method.toLowerCase() : "get"
     console.log("Method value:", methodValue)
     if (methodValue !== "get" && methodValue !== "post") {
@@ -184,10 +183,10 @@ export default class extends Controller {
       console.log("Added method override:", methodValue)
     }
 
-    // Append to body
+    // append to body then submit (form has to be in dom)
     document.body.appendChild(form)
 
-    // Log form details before submission
+    // log right before submit for debugging
     console.log("Submitting form:", {
       action: form.action,
       method: form.method,
@@ -195,12 +194,12 @@ export default class extends Controller {
       methodOverrideValue: form.querySelector('input[name="_method"]')?.value
     })
 
-    // Submit the form - this will cause a full page reload with the redirect
+    // submit - full page reload, server sends redirect
     form.submit()
   }
 
   submitFormFallback(url, method) {
-    // Fallback: create and submit a regular form
+    // fallback if something went wrong - same idea, build form and submit
     const form = document.createElement("form")
     form.method = "post"
     form.action = url
@@ -240,7 +239,7 @@ export default class extends Controller {
   }
 
   handleBackdrop(event) {
-    // If clicking directly on the backdrop (not the modal content), close it
+    // if they clicked the backdrop (not the modal box) close it
     const modalElement = document.getElementById("confirmation-modal")
     if (modalElement && event.target === modalElement) {
       this.hide()

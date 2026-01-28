@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Builds dashboard data for the habits index: habits with stats, completion count, week range.
+# Delegates per-habit row building to HabitsDashboardQuery::HabitRowBuilder.
 class HabitsDashboardQuery
   attr_reader :user, :today_date
 
@@ -19,16 +23,13 @@ class HabitsDashboardQuery
 
   def habits_with_stats
     active_habits.map do |habit|
-      calculator = StreakCalculator.new(habit, reference_date: today_date, user_timezone: user.timezone)
       checkins_for_habit = checkins_by_habit_id[habit.id] || []
-
-      {
-        habit: habit,
-        current_streak_days: calculator.current_streak_days,
-        longest_streak_days: calculator.longest_streak_days,
-        completion_rate_last_7_days: calculator.completion_rate_last_7_days,
-        checked_in_dates: checkins_for_habit.map(&:occurred_on).to_set
-      }
+      HabitRowBuilder.call(
+        habit,
+        reference_date: today_date,
+        user_timezone: user.timezone,
+        checkins_for_habit: checkins_for_habit
+      )
     end
   end
 

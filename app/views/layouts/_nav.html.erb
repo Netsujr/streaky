@@ -1,0 +1,47 @@
+<nav class="bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200/50 sticky top-0 z-40">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4 sm:space-x-8">
+        <%= link_to root_path, class: "flex items-center space-x-2 group" do %>
+          <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            <span class="text-white font-bold text-lg">S</span>
+          </div>
+          <span class="text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Streaky</span>
+        <% end %>
+        <div class="hidden md:flex items-center space-x-1">
+          <%= link_to root_path, class: "px-4 py-2 rounded-lg text-sm font-medium transition-colors #{request.path == root_path ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}" do %>
+            Dashboard
+          <% end %>
+          <%= link_to habits_path, class: "px-4 py-2 rounded-lg text-sm font-medium transition-colors #{request.path == habits_path ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}" do %>
+            Habits
+          <% end %>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <div class="hidden sm:flex items-center space-x-3 px-3 sm:px-4 py-2 rounded-lg bg-gray-50">
+          <div class="w-8 h-8 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+            <%= current_user.name.first.upcase %>
+          </div>
+          <span class="hidden lg:inline text-sm font-medium text-gray-700"><%= current_user.name %></span>
+        </div>
+        <%= link_to settings_path, class: "p-2 sm:p-2.5 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors touch-manipulation" do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        <% end %>
+        <button type="button" id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors touch-manipulation" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <div class="hidden md:block">
+          <%= button_to sign_out_path, method: :delete, class: "px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors touch-manipulation" do %>
+            Sign Out
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render "layouts/mobile_menu" %>
+  </div>
+</nav>

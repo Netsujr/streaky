@@ -9201,3 +9201,1155 @@ Completed 200 OK in 47ms (Views: 15.5ms | ActiveRecord: 6.6ms | Allocations: 264
   [1m[36mGoodJob::Process Destroy (1.0ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "b998458a-7d3a-4575-b20b-8555e62dac5a"]]
   [1m[36mGoodJob::Job Update All (3.7ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1 WHERE "good_jobs"."locked_by_id" = $2[0m  [["locked_by_id", nil], ["locked_by_id", "b998458a-7d3a-4575-b20b-8555e62dac5a"]]
   [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (4.1ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "80d02108ee0fde1cfa9eeacb751749255572eb80"], ["created_at", "2026-01-28 10:14:21.476874"], ["updated_at", "2026-01-28 10:14:21.476874"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (6.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.4ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2026-01-28 10:14:21.585017"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2026-01-28 10:14:21.589732"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Demo User"], ["email", "demo@streaky.app"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-01-28 10:14:21.884517"], ["updated_at", "2026-01-28 10:14:21.884517"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (1.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Daily Exercise"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (5.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Daily Exercise"], ["goal_per_week", 7], ["start_date", "2025-12-29"], ["archived_at", nil], ["color", "blue"], ["created_at", "2026-01-28 10:14:21.912684"], ["updated_at", "2026-01-28 10:14:21.912684"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.4ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["goal_per_week", 5], ["start_date", "2026-01-08"], ["archived_at", nil], ["color", "green"], ["created_at", "2026-01-28 10:14:21.921622"], ["updated_at", "2026-01-28 10:14:21.921622"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Meditate"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.5ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Meditate"], ["goal_per_week", 7], ["start_date", "2026-01-14"], ["archived_at", nil], ["color", "purple"], ["created_at", "2026-01-28 10:14:21.924782"], ["updated_at", "2026-01-28 10:14:21.924782"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (1.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (2.1ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 10:14:21.943068"], ["updated_at", "2026-01-28 10:14:21.943068"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 10:14:21.949442"], ["updated_at", "2026-01-28 10:14:21.949442"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.8ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 10:14:21.954058"], ["updated_at", "2026-01-28 10:14:21.954058"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (1.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 10:14:21.959585"], ["updated_at", "2026-01-28 10:14:21.959585"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:14:21.963891"], ["updated_at", "2026-01-28 10:14:21.963891"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:14:21.971762"], ["updated_at", "2026-01-28 10:14:21.971762"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:14:21.975774"], ["updated_at", "2026-01-28 10:14:21.975774"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-25"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["created_at", "2026-01-28 10:14:21.979446"], ["updated_at", "2026-01-28 10:14:21.979446"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:14:21.983119"], ["updated_at", "2026-01-28 10:14:21.983119"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:14:21.986659"], ["updated_at", "2026-01-28 10:14:21.986659"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:14:21.990232"], ["updated_at", "2026-01-28 10:14:21.990232"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 10:14:21.993674"], ["updated_at", "2026-01-28 10:14:21.993674"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 10:14:21.997067"], ["updated_at", "2026-01-28 10:14:21.997067"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 10:14:22.000909"], ["updated_at", "2026-01-28 10:14:22.000909"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 10:14:22.004502"], ["updated_at", "2026-01-28 10:14:22.004502"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-21"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["created_at", "2026-01-28 10:14:22.008201"], ["updated_at", "2026-01-28 10:14:22.008201"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 10:14:22.011802"], ["updated_at", "2026-01-28 10:14:22.011802"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 10:14:22.015369"], ["updated_at", "2026-01-28 10:14:22.015369"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 10:14:22.018959"], ["updated_at", "2026-01-28 10:14:22.018959"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 10:14:22.022961"], ["updated_at", "2026-01-28 10:14:22.022961"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-17"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["created_at", "2026-01-28 10:14:22.026769"], ["updated_at", "2026-01-28 10:14:22.026769"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-28 10:14:22.030305"], ["updated_at", "2026-01-28 10:14:22.030305"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-15"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["created_at", "2026-01-28 10:14:22.033806"], ["updated_at", "2026-01-28 10:14:22.033806"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (3.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (18.8ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2026-01-28 10:46:33.708414"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2026-01-28 10:46:33.712411"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mUser Create (4.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Demo User"], ["email", "demo@streaky.app"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-01-28 10:46:33.998211"], ["updated_at", "2026-01-28 10:46:33.998211"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (1.9ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Daily Exercise"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (5.2ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Daily Exercise"], ["goal_per_week", 7], ["start_date", "2025-12-29"], ["archived_at", nil], ["color", "blue"], ["created_at", "2026-01-28 10:46:34.024868"], ["updated_at", "2026-01-28 10:46:34.024868"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.5ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["goal_per_week", 5], ["start_date", "2026-01-08"], ["archived_at", nil], ["color", "green"], ["created_at", "2026-01-28 10:46:34.033594"], ["updated_at", "2026-01-28 10:46:34.033594"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Meditate"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Meditate"], ["goal_per_week", 7], ["start_date", "2026-01-14"], ["archived_at", nil], ["color", "purple"], ["created_at", "2026-01-28 10:46:34.036800"], ["updated_at", "2026-01-28 10:46:34.036800"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (1.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (2.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 10:46:34.053364"], ["updated_at", "2026-01-28 10:46:34.053364"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 10:46:34.059170"], ["updated_at", "2026-01-28 10:46:34.059170"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.8ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 10:46:34.063605"], ["updated_at", "2026-01-28 10:46:34.063605"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 10:46:34.068145"], ["updated_at", "2026-01-28 10:46:34.068145"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.1ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:46:34.072307"], ["updated_at", "2026-01-28 10:46:34.072307"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:46:34.077663"], ["updated_at", "2026-01-28 10:46:34.077663"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 10:46:34.085829"], ["updated_at", "2026-01-28 10:46:34.085829"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-25"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["created_at", "2026-01-28 10:46:34.089533"], ["updated_at", "2026-01-28 10:46:34.089533"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:46:34.093283"], ["updated_at", "2026-01-28 10:46:34.093283"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:46:34.096759"], ["updated_at", "2026-01-28 10:46:34.096759"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 10:46:34.101476"], ["updated_at", "2026-01-28 10:46:34.101476"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 10:46:34.105863"], ["updated_at", "2026-01-28 10:46:34.105863"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 10:46:34.110273"], ["updated_at", "2026-01-28 10:46:34.110273"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 10:46:34.114760"], ["updated_at", "2026-01-28 10:46:34.114760"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 10:46:34.118525"], ["updated_at", "2026-01-28 10:46:34.118525"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-21"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["created_at", "2026-01-28 10:46:34.122494"], ["updated_at", "2026-01-28 10:46:34.122494"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 10:46:34.126045"], ["updated_at", "2026-01-28 10:46:34.126045"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 10:46:34.129976"], ["updated_at", "2026-01-28 10:46:34.129976"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 10:46:34.133908"], ["updated_at", "2026-01-28 10:46:34.133908"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 10:46:34.137830"], ["updated_at", "2026-01-28 10:46:34.137830"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-17"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["created_at", "2026-01-28 10:46:34.142376"], ["updated_at", "2026-01-28 10:46:34.142376"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-28 10:46:34.145802"], ["updated_at", "2026-01-28 10:46:34.145802"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-15"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["created_at", "2026-01-28 10:46:34.149141"], ["updated_at", "2026-01-28 10:46:34.149141"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.2ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkins" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "checkins" ("id" bigserial primary key, "habit_id" bigint NOT NULL, "user_id" bigint NOT NULL, "occurred_on" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_checkins_on_habit_id_and_occurred_on" ON "checkins" ("habit_id", "occurred_on")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_habit_id" ON "checkins" ("habit_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id_and_occurred_on" ON "checkins" ("user_id", "occurred_on")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_checkins_on_user_id" ON "checkins" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_batches" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "good_job_batches" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "description" text, "serialized_properties" jsonb, "on_finish" text, "on_success" text, "on_discard" text, "callback_queue_name" text, "callback_priority" integer, "enqueued_at" timestamp(6), "discarded_at" timestamp(6), "finished_at" timestamp(6), "jobs_finished_at" timestamp(6))[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_executions" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "good_job_executions" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid NOT NULL, "job_class" text, "queue_name" text, "serialized_params" jsonb, "scheduled_at" timestamp(6), "finished_at" timestamp(6), "error" text, "error_event" smallint, "error_backtrace" text[], "process_id" uuid, "duration" interval)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_active_job_id_and_created_at" ON "good_job_executions" ("active_job_id", "created_at")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_job_executions_on_process_id_and_created_at" ON "good_job_executions" ("process_id", "created_at")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_processes" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "good_job_processes" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "state" jsonb, "lock_type" smallint)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_job_settings" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "good_job_settings" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "key" text, "value" jsonb)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_job_settings_on_key" ON "good_job_settings" ("key")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "good_jobs" CASCADE[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "good_jobs" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "queue_name" text, "priority" integer, "serialized_params" jsonb, "scheduled_at" timestamp(6), "performed_at" timestamp(6), "finished_at" timestamp(6), "error" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "active_job_id" uuid, "concurrency_key" text, "cron_key" text, "retried_good_job_id" uuid, "cron_at" timestamp(6), "batch_id" uuid, "batch_callback_id" uuid, "is_discrete" boolean, "executions_count" integer, "job_class" text, "error_event" smallint, "labels" text[], "locked_by_id" uuid, "locked_at" timestamp(6))[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_active_job_id_and_created_at" ON "good_jobs" ("active_job_id", "created_at")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_callback_id" ON "good_jobs" ("batch_callback_id") WHERE (batch_callback_id IS NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_batch_id" ON "good_jobs" ("batch_id") WHERE (batch_id IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_and_created_at" ON "good_jobs" ("concurrency_key", "created_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_concurrency_key_when_unfinished" ON "good_jobs" ("concurrency_key") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_cron_key_and_created_at_cond" ON "good_jobs" ("cron_key", "created_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_good_jobs_on_cron_key_and_cron_at_cond" ON "good_jobs" ("cron_key", "cron_at") WHERE (cron_key IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_finished_at_only" ON "good_jobs" ("finished_at") WHERE (finished_at IS NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_job_class" ON "good_jobs" ("job_class")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_labels" ON "good_jobs" USING gin ("labels") WHERE (labels IS NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_locked_by_id" ON "good_jobs" ("locked_by_id") WHERE (locked_by_id IS NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_job_jobs_for_candidate_lookup" ON "good_jobs" ("priority", "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_jobs_on_priority_created_at_when_unfinished" ON "good_jobs" ("priority" DESC NULLS LAST, "created_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked" ON "good_jobs" ("priority", "scheduled_at") WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_queue_name_and_scheduled_at" ON "good_jobs" ("queue_name", "scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_good_jobs_on_scheduled_at" ON "good_jobs" ("scheduled_at") WHERE (finished_at IS NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "habits" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "habits" ("id" bigserial primary key, "user_id" bigint NOT NULL, "name" character varying(60) NOT NULL, "goal_per_week" integer DEFAULT 7 NOT NULL, "start_date" date NOT NULL, "archived_at" timestamp(6), "color" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id_and_archived_at" ON "habits" ("user_id", "archived_at")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_habits_on_user_id" ON "habits" ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "timezone" character varying DEFAULT 'America/Sao_Paulo' NOT NULL, "weekly_summary_enabled" boolean DEFAULT TRUE NOT NULL, "reminders_enabled" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_83a809b5ed"
+FOREIGN KEY ("habit_id")
+  REFERENCES "habits" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "checkins" ADD CONSTRAINT "fk_rails_4b2b85ec8b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "habits" ADD CONSTRAINT "fk_rails_541267aaf9"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.9ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2026-01-28 11:20:26.082231"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2026-01-28 11:20:26.086031"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Demo User"], ["email", "demo@streaky.app"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-01-28 11:20:26.449629"], ["updated_at", "2026-01-28 11:20:26.449629"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (1.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Daily Exercise"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (3.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Daily Exercise"], ["goal_per_week", 7], ["start_date", "2025-12-29"], ["archived_at", nil], ["color", "blue"], ["created_at", "2026-01-28 11:20:26.470433"], ["updated_at", "2026-01-28 11:20:26.470433"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.4ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["goal_per_week", 5], ["start_date", "2026-01-08"], ["archived_at", nil], ["color", "green"], ["created_at", "2026-01-28 11:20:26.477331"], ["updated_at", "2026-01-28 11:20:26.477331"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Meditate"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHabit Create (0.7ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Meditate"], ["goal_per_week", 7], ["start_date", "2026-01-14"], ["archived_at", nil], ["color", "purple"], ["created_at", "2026-01-28 11:20:26.480419"], ["updated_at", "2026-01-28 11:20:26.480419"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (1.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 11:20:26.495084"], ["updated_at", "2026-01-28 11:20:26.495084"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["created_at", "2026-01-28 11:20:26.500231"], ["updated_at", "2026-01-28 11:20:26.500231"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 11:20:26.503981"], ["updated_at", "2026-01-28 11:20:26.503981"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["created_at", "2026-01-28 11:20:26.507901"], ["updated_at", "2026-01-28 11:20:26.507901"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 11:20:26.511289"], ["updated_at", "2026-01-28 11:20:26.511289"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.6ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 11:20:26.515397"], ["updated_at", "2026-01-28 11:20:26.515397"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-26"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["created_at", "2026-01-28 11:20:26.522478"], ["updated_at", "2026-01-28 11:20:26.522478"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-25"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["created_at", "2026-01-28 11:20:26.526254"], ["updated_at", "2026-01-28 11:20:26.526254"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 11:20:26.529760"], ["updated_at", "2026-01-28 11:20:26.529760"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 11:20:26.533026"], ["updated_at", "2026-01-28 11:20:26.533026"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["created_at", "2026-01-28 11:20:26.536382"], ["updated_at", "2026-01-28 11:20:26.536382"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 11:20:26.539849"], ["updated_at", "2026-01-28 11:20:26.539849"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["created_at", "2026-01-28 11:20:26.542976"], ["updated_at", "2026-01-28 11:20:26.542976"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 11:20:26.546285"], ["updated_at", "2026-01-28 11:20:26.546285"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-22"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["created_at", "2026-01-28 11:20:26.549704"], ["updated_at", "2026-01-28 11:20:26.549704"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-21"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["created_at", "2026-01-28 11:20:26.552991"], ["updated_at", "2026-01-28 11:20:26.552991"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 11:20:26.556467"], ["updated_at", "2026-01-28 11:20:26.556467"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-20"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["created_at", "2026-01-28 11:20:26.559980"], ["updated_at", "2026-01-28 11:20:26.559980"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 11:20:26.564656"], ["updated_at", "2026-01-28 11:20:26.564656"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-18"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["created_at", "2026-01-28 11:20:26.567955"], ["updated_at", "2026-01-28 11:20:26.567955"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-17"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["created_at", "2026-01-28 11:20:26.572268"], ["updated_at", "2026-01-28 11:20:26.572268"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-16"], ["habit_id", 1], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["created_at", "2026-01-28 11:20:26.577250"], ["updated_at", "2026-01-28 11:20:26.577250"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-15"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["created_at", "2026-01-28 11:20:26.582603"], ["updated_at", "2026-01-28 11:20:26.582603"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE DATABASE "streaky_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "streaky_test" ENCODING = 'unicode'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7174456964686492215)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Daily Exercise"], ["LIMIT", 1]]
+  [1m[36mHabit Load (0.1ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Read for 30 minutes"], ["LIMIT", 1]]
+  [1m[36mHabit Load (0.1ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."name" = $2 LIMIT $3[0m  [["user_id", 1], ["name", "Meditate"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (1.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.4ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-28"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-27"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-26"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-25"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-24"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-23"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 3], ["user_id", 1], ["occurred_on", "2026-01-22"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-21"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-20"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-18"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-17"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 1], ["user_id", 1], ["occurred_on", "2026-01-16"], ["LIMIT", 1]]
+  [1m[36mCheckin Load (0.1ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 2], ["user_id", 1], ["occurred_on", "2026-01-15"], ["LIMIT", 1]]
+[GoodJob] [54578] GoodJob 4.13.1 started scheduler with queues=* max_threads=5.
+Started GET "/" for ::1 at 2026-01-28 14:53:25 -0300
+  [1m[35m (0.0ms)[0m  [1m[35mSET application_name = 'GoodJob::Notifier'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mLISTEN good_job[0m
+[GoodJob] Notifier subscribed with LISTEN
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DashboardController#show as HTML
+Redirected to http://[::1]:3000/sign_in
+  [1m[36mGoodJob::Job Pluck (11.8ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" > $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-28 17:53:25.565783"], ["LIMIT", 10000]]
+  [1m[36mGoodJob::Process Load (3.9ms)[0m  [1m[34mSELECT "good_job_processes".* FROM "good_job_processes" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_job_processes' || '-' || "good_job_processes"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE ("good_job_processes"."lock_type" = $1 AND "pg_locks"."locktype" IS NULL OR "good_job_processes"."lock_type" IS NULL AND "good_job_processes"."updated_at" < '2026-01-28 17:48:25.573071') ORDER BY "good_job_processes"."id" ASC LIMIT $2[0m  [["lock_type", 0], ["LIMIT", 1000]]
+Filter chain halted as :require_authentication rendered or redirected
+Completed 302 Found in 18ms (ActiveRecord: 0.0ms | Allocations: 4477)
+
+
+  [1m[36mGoodJob::Job Pluck (12.1ms)[0m  [1m[34mSELECT "good_jobs"."scheduled_at" FROM "good_jobs" LEFT JOIN pg_locks ON pg_locks.locktype = 'advisory' AND pg_locks.objsubid = 1 AND pg_locks.classid = ('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(32)::int AND pg_locks.objid = (('x' || substr(md5('good_jobs' || '-' || "good_jobs"."id"::text), 1, 16))::bit(64) << 32)::bit(32)::int WHERE "pg_locks"."locktype" IS NULL AND "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" < $1 ORDER BY "good_jobs"."scheduled_at" ASC LIMIT $2[0m  [["scheduled_at", "2026-01-28 17:53:25.578469"], ["LIMIT", 5]]
+Started GET "/sign_in" for ::1 at 2026-01-28 14:53:25 -0300
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+Processing by SessionsController#new as HTML
+  [1m[36mGoodJob::Process Create (3.5ms)[0m  [1m[32mINSERT INTO "good_job_processes" ("id", "created_at", "updated_at", "state", "lock_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["id", "508fa8aa-5365-4d47-8384-3b6d0780e727"], ["created_at", "2026-01-28 17:53:25.610001"], ["updated_at", "2026-01-28 17:53:25.610001"], ["state", "{\"hostname\":\"Renato-Hivelocity-M3.local\",\"pid\":54578,\"memory\":106004,\"proctitle\":\"./bin/rails\",\"preserve_job_records\":true,\"retry_on_unhandled_error\":false,\"schedulers\":[{\"name\":\"GoodJob::Scheduler(queues=* max_threads=5)\",\"queues\":\"*\",\"max_threads\":5,\"active_threads\":1,\"available_threads\":4,\"max_cache\":10000,\"active_cache\":0,\"available_cache\":10000,\"empty_executions_count\":0,\"errored_executions_count\":0,\"succeeded_executions_count\":0,\"total_executions_count\":0,\"execution_at\":null,\"check_queue_at\":null}],\"cron_enabled\":false,\"total_succeeded_executions_count\":0,\"total_errored_executions_count\":0,\"database_connection_pool\":{\"size\":5,\"active\":0}}"], ["lock_type", 0]]
+  [1m[36mGoodJob::Lockable Advisory Lock (2.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS locked[0m  [["key", "good_job_processes-508fa8aa-5365-4d47-8384-3b6d0780e727"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGoodJob::Job Load (4.4ms)[0m  [1m[34mSELECT "good_jobs"."id", "good_jobs"."queue_name", "good_jobs"."priority", "good_jobs"."serialized_params", "good_jobs"."scheduled_at", "good_jobs"."performed_at", "good_jobs"."finished_at", "good_jobs"."error", "good_jobs"."created_at", "good_jobs"."updated_at", "good_jobs"."active_job_id", "good_jobs"."concurrency_key", "good_jobs"."cron_key", "good_jobs"."cron_at", "good_jobs"."batch_id", "good_jobs"."batch_callback_id", "good_jobs"."executions_count", "good_jobs"."job_class", "good_jobs"."error_event", "good_jobs"."labels", "good_jobs"."locked_by_id", "good_jobs"."locked_at" FROM "good_jobs" WHERE "good_jobs"."id" IN (WITH "rows" AS  MATERIALIZED (SELECT "good_jobs"."id" FROM "good_jobs" WHERE "good_jobs"."finished_at" IS NULL AND "good_jobs"."scheduled_at" <= $1 ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC) SELECT "rows"."id" FROM "rows" WHERE pg_try_advisory_lock(('x' || substr(md5('good_jobs' || '-' || "rows"."id"::text), 1, 16))::bit(64)::bigint) LIMIT $2) ORDER BY priority ASC NULLS LAST, "good_jobs"."created_at" ASC[0m  [["scheduled_at", "2026-01-28 17:53:25.623136"], ["LIMIT", 1]]
+  Rendering layout layouts/authentication.html.erb
+  Rendering sessions/new.html.erb within layouts/authentication
+  Rendered sessions/new.html.erb within layouts/authentication (Duration: 4.4ms | Allocations: 4073)
+  Rendered layout layouts/authentication.html.erb (Duration: 20.4ms | Allocations: 8258)
+Completed 200 OK in 49ms (Views: 22.2ms | ActiveRecord: 10.8ms | Allocations: 27122)
+
+
+Started POST "/sign_in" for ::1 at 2026-01-28 14:53:40 -0300
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"demo@streaky.app", "password"=>"[FILTERED]", "commit"=>"Sign In"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@streaky.app"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:11:in `create'
+Redirected to http://[::1]:3000/
+Completed 302 Found in 252ms (ActiveRecord: 2.3ms | Allocations: 1695)
+
+
+Started GET "/" for ::1 at 2026-01-28 14:53:40 -0300
+Processing by DashboardController#show as TURBO_STREAM
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (2.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (3.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2, $3)[0m  [["habit_id", 3], ["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (6.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-22"], ["occurred_on", "2026-01-28"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2, $3)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 3]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-28"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.6ms | Allocations: 180)
+  Rendered collection of habits/_habit_card.html.erb [3 times] (Duration: 5.0ms | Allocations: 7155)
+  Rendered habits/_form.html.erb (Duration: 5.7ms | Allocations: 3084)
+  Rendered habits/_form_modal.html.erb (Duration: 6.4ms | Allocations: 3448)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 13.7ms | Allocations: 11772)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.3ms | Allocations: 135)
+  Rendered habits/_form.html.erb (Duration: 0.8ms | Allocations: 1627)
+  Rendered habits/_form_modal.html.erb (Duration: 0.9ms | Allocations: 1736)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 16694)
+Completed 200 OK in 88ms (Views: 18.1ms | ActiveRecord: 36.1ms | Allocations: 44982)
+
+
+Started PATCH "/habits/3/archive" for ::1 at 2026-01-28 14:54:02 -0300
+Processing by HabitsController#archive as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"3"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/habits_controller.rb:83:in `set_habit'
+  [1m[36mHabit Update (3.4ms)[0m  [1m[33mUPDATE "habits" SET "archived_at" = $1 WHERE "habits"."id" = $2[0m  [["archived_at", "2026-01-28 17:54:02.863415"], ["id", 3]]
+  ↳ app/controllers/habits_controller.rb:74:in `archive'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/habits_controller.rb:75:in `archive'
+Redirected to http://[::1]:3000/
+Completed 302 Found in 47ms (ActiveRecord: 5.3ms | Allocations: 3269)
+
+
+Started GET "/" for ::1 at 2026-01-28 14:54:02 -0300
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.7ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2)[0m  [["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:21:in `map'
+  [1m[36mCheckin Load (0.8ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-22"], ["occurred_on", "2026-01-28"]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mHabit Load (0.6ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2)[0m  [["id", 1], ["id", 2]]
+  ↳ app/queries/habits_dashboard_query.rb:47:in `group_by'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-01-28"]]
+  ↳ app/queries/habits_dashboard_query.rb:51:in `today_completion_count'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/_header.html.erb (Duration: 0.0ms | Allocations: 15)
+  Rendered collection of habits/_habit_card.html.erb [2 times] (Duration: 4.6ms | Allocations: 4217)
+  Rendered habits/_form.html.erb (Duration: 2.6ms | Allocations: 1605)
+  Rendered habits/_form_modal.html.erb (Duration: 2.8ms | Allocations: 1714)
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 8.3ms | Allocations: 6256)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered habits/_form.html.erb (Duration: 1.3ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 1.7ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | Allocations: 9697)
+Completed 200 OK in 31ms (Views: 12.6ms | ActiveRecord: 4.7ms | Allocations: 17955)
+
+
+Started GET "/habits" for ::1 at 2026-01-28 14:54:20 -0300
+Processing by HabitsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/index.html.erb within layouts/application
+  [1m[36mHabit Load (0.7ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/index.html.erb:27
+  Rendered habits/index.html.erb within layouts/application (Duration: 6.6ms | Allocations: 2062)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 12)
+  Rendered habits/_form.html.erb (Duration: 1.5ms | Allocations: 1683)
+  Rendered habits/_form_modal.html.erb (Duration: 1.7ms | Allocations: 1797)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 5821)
+Completed 200 OK in 20ms (Views: 11.5ms | ActiveRecord: 1.2ms | Allocations: 7490)
+
+
+Started GET "/habits/archived" for ::1 at 2026-01-28 14:54:22 -0300
+Processing by HabitsController#archived as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/archived.html.erb within layouts/application
+  [1m[36mHabit Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NOT NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/habits/archived.html.erb:15
+  [1m[36mHabit Load (0.3ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NOT NULL ORDER BY "habits"."archived_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/archived.html.erb:17
+  Rendered habits/archived.html.erb within layouts/application (Duration: 8.3ms | Allocations: 2307)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.2ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 2.0ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 2.3ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 14.1ms | Allocations: 5719)
+Completed 200 OK in 21ms (Views: 12.8ms | ActiveRecord: 2.5ms | Allocations: 7114)
+
+
+Started GET "/habits" for ::1 at 2026-01-28 14:54:23 -0300
+Processing by HabitsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/index.html.erb within layouts/application
+  [1m[36mHabit Load (0.8ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/index.html.erb:27
+  Rendered habits/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1345)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 1.8ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 2.0ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 4756)
+Completed 200 OK in 12ms (Views: 6.9ms | ActiveRecord: 1.5ms | Allocations: 5924)
+
+
+Started GET "/habits/new" for ::1 at 2026-01-28 14:54:23 -0300
+Processing by HabitsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb
+  Rendering habits/new.html.erb within layouts/turbo_rails/frame
+  Rendered habits/_form.html.erb (Duration: 3.0ms | Allocations: 1529)
+  Rendered habits/new.html.erb within layouts/turbo_rails/frame (Duration: 5.2ms | Allocations: 1820)
+  Rendered layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb (Duration: 6.2ms | Allocations: 2043)
+Completed 200 OK in 14ms (Views: 7.6ms | ActiveRecord: 0.5ms | Allocations: 3650)
+
+
+Started GET "/habits/2" for ::1 at 2026-01-28 14:54:27 -0300
+Processing by HabitsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  [1m[36mHabit Load (0.8ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/habits_controller.rb:83:in `set_habit'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/show.html.erb within layouts/application
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["habit_id", 2], ["occurred_on", "2026-01-22"], ["occurred_on", "2026-01-28"]]
+  ↳ app/views/habits/show.html.erb:4
+  [1m[36mCheckin Pluck (0.8ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-01-28')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:55:in `checked_in_dates'
+  [1m[36mCheckin Pluck (0.3ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-22')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator.rb:47:in `checked_in_dates_set'
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."habit_id" = $1[0m  [["habit_id", 2]]
+  ↳ app/views/habits/show.html.erb:103
+  Rendered habits/show.html.erb within layouts/application (Duration: 17.9ms | Allocations: 5854)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 2.1ms | Allocations: 1526)
+  Rendered habits/_form_modal.html.erb (Duration: 2.4ms | Allocations: 1635)
+  Rendered layout layouts/application.html.erb (Duration: 23.2ms | Allocations: 9256)
+Completed 200 OK in 32ms (Views: 21.7ms | ActiveRecord: 3.3ms | Allocations: 10983)
+
+
+Started GET "/habits" for ::1 at 2026-01-28 14:54:34 -0300
+Processing by HabitsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/index.html.erb within layouts/application
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/index.html.erb:27
+  Rendered habits/index.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1345)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 2.1ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 2.3ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 4756)
+Completed 200 OK in 16ms (Views: 10.0ms | ActiveRecord: 0.8ms | Allocations: 5923)
+
+
+Started GET "/habits/archived" for ::1 at 2026-01-28 14:54:36 -0300
+Processing by HabitsController#archived as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/archived.html.erb within layouts/application
+  [1m[36mHabit Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NOT NULL LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/habits/archived.html.erb:15
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NOT NULL ORDER BY "habits"."archived_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/archived.html.erb:17
+  Rendered habits/archived.html.erb within layouts/application (Duration: 4.4ms | Allocations: 1573)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.1ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 2.2ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 2.4ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 11.3ms | Allocations: 4984)
+Completed 200 OK in 17ms (Views: 10.3ms | ActiveRecord: 1.9ms | Allocations: 6161)
+
+
+Started GET "/habits" for ::1 at 2026-01-28 14:54:37 -0300
+Processing by HabitsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering habits/index.html.erb within layouts/application
+  [1m[36mHabit Load (0.5ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/habits/index.html.erb:27
+  Rendered habits/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1345)
+  Rendered shared/_confirmation_modal.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered habits/_form.html.erb (Duration: 1.7ms | Allocations: 1527)
+  Rendered habits/_form_modal.html.erb (Duration: 1.9ms | Allocations: 1636)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 4756)
+Completed 200 OK in 12ms (Views: 6.7ms | ActiveRecord: 0.9ms | Allocations: 5906)
+
+
+Started GET "/habits/new" for ::1 at 2026-01-28 14:54:37 -0300
+Processing by HabitsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `current_user'
+  Rendering layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb
+  Rendering habits/new.html.erb within layouts/turbo_rails/frame
+  Rendered habits/_form.html.erb (Duration: 4.2ms | Allocations: 1524)
+  Rendered habits/new.html.erb within layouts/turbo_rails/frame (Duration: 4.5ms | Allocations: 1633)
+  Rendered layout /Users/hivelocity/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/turbo-rails-2.0.12/app/views/layouts/turbo_rails/frame.html.erb (Duration: 4.9ms | Allocations: 1724)
+Completed 200 OK in 9ms (Views: 5.4ms | ActiveRecord: 0.6ms | Allocations: 2881)
+
+
+Started GET "/main.d369f7acf4c729c17245.hot-update.json" for ::1 at 2026-01-28 14:56:09 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/main.d369f7acf4c729c17245.hot-update.json"):
+  
+Started GET "/projects" for ::1 at 2026-01-28 14:56:09 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/projects"):
+  
+Started GET "/projects" for ::1 at 2026-01-28 14:56:36 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/projects"):
+  
+  [1m[35m (0.4ms)[0m  [1m[35mUNLISTEN *[0m
+[GoodJob] Notifier unsubscribed with UNLISTEN
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGoodJob::Lockable Advisory Unlock (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(('x'||substr(md5($1::text), 1, 16))::bit(64)::bigint) AS unlocked[0m  [["key", "good_job_processes-508fa8aa-5365-4d47-8384-3b6d0780e727"]]
+  [1m[36mGoodJob::Process Destroy (0.6ms)[0m  [1m[31mDELETE FROM "good_job_processes" WHERE "good_job_processes"."id" = $1[0m  [["id", "508fa8aa-5365-4d47-8384-3b6d0780e727"]]
+  [1m[36mGoodJob::Job Update All (2.5ms)[0m  [1m[33mUPDATE "good_jobs" SET "locked_by_id" = $1 WHERE "good_jobs"."locked_by_id" = $2[0m  [["locked_by_id", nil], ["locked_by_id", "508fa8aa-5365-4d47-8384-3b6d0780e727"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mHabit Load (1.9ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:25:in `map'
+  [1m[36mCheckin Load (1.2ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN ($1, $2)[0m  [["habit_id", 2], ["habit_id", 1]]
+  ↳ app/queries/habits_dashboard_query.rb:25:in `map'
+  [1m[36mCheckin Load (3.0ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" IN (SELECT "habits"."id" FROM "habits" WHERE "habits"."user_id" = $1 AND "habits"."archived_at" IS NULL ORDER BY "habits"."created_at" DESC) AND "checkins"."occurred_on" BETWEEN $2 AND $3[0m  [["user_id", 1], ["occurred_on", "2026-01-27"], ["occurred_on", "2026-02-02"]]
+  ↳ app/queries/habits_dashboard_query.rb:48:in `group_by'
+  [1m[36mHabit Load (0.4ms)[0m  [1m[34mSELECT "habits".* FROM "habits" WHERE "habits"."id" IN ($1, $2)[0m  [["id", 1], ["id", 2]]
+  ↳ app/queries/habits_dashboard_query.rb:48:in `group_by'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator/checked_in_dates.rb:32:in `load_dates_up_to_reference'
+  [1m[36mCheckin Pluck (0.6ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-27')[0m  [["habit_id", 2]]
+  ↳ app/services/streak_calculator/checked_in_dates.rb:20:in `in_range'
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator/checked_in_dates.rb:32:in `load_dates_up_to_reference'
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-27')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator/checked_in_dates.rb:20:in `in_range'
+  [1m[36mCheckin Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins" WHERE "checkins"."user_id" = $1 AND "checkins"."occurred_on" = $2[0m  [["user_id", 1], ["occurred_on", "2026-02-02"]]
+  ↳ app/queries/habits_dashboard_query.rb:52:in `today_completion_count'
+  [1m[36mHabit Load (0.1ms)[0m  [1m[34mSELECT "habits".* FROM "habits" ORDER BY "habits"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 1]]
+  ↳ app/services/streak_calculator/checked_in_dates.rb:32:in `load_dates_up_to_reference'

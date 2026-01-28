@@ -1418,3 +1418,355 @@ ReminderMailerTest: test_reminder
   Rendered layout layouts/mailer.text.erb (Duration: 0.3ms | Allocations: 329)
 ReminderMailer#reminder: processed outbound mail in 2.1ms
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------
+StreakCalculatorTest: test_uses_user_timezone_for_today_calculation
+-------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (4.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:32.997549"], ["updated_at", "2026-02-02 17:27:32.997549"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (5.7ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.103592"], ["updated_at", "2026-02-02 17:27:33.103592"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "utc@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "UTC User"], ["email", "utc@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "UTC"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.116536"], ["updated_at", "2026-02-02 17:27:33.116536"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (1.4ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 2], ["name", "UTC Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.118369"], ["updated_at", "2026-02-02 17:27:33.118369"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 2], ["LIMIT", 1]]
+  [1m[36mCheckin Create (5.6ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 2], ["user_id", 2], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.150559"], ["updated_at", "2026-02-02 17:27:33.150559"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (1.1ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 2]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------------------------
+StreakCalculatorTest: test_completion_rate_calculation_for_last_7_days
+----------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.167985"], ["updated_at", "2026-02-02 17:27:33.167985"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.8ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 3], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.172875"], ["updated_at", "2026-02-02 17:27:33.172875"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 3], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.176514"], ["updated_at", "2026-02-02 17:27:33.176514"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-01"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 3], ["occurred_on", "2026-02-01"], ["created_at", "2026-02-02 17:27:33.182355"], ["updated_at", "2026-02-02 17:27:33.182355"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-31"], ["habit_id", 3], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 3], ["user_id", 3], ["occurred_on", "2026-01-31"], ["created_at", "2026-02-02 17:27:33.187873"], ["updated_at", "2026-02-02 17:27:33.187873"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (1.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on >= '2026-01-27')[0m  [["habit_id", 3]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+StreakCalculatorTest: test_calculates_current_streak_correctly
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.201556"], ["updated_at", "2026-02-02 17:27:33.201556"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (1.1ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 4], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.205795"], ["updated_at", "2026-02-02 17:27:33.205795"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 4], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.8ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 4], ["user_id", 4], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.213489"], ["updated_at", "2026-02-02 17:27:33.213489"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-01"], ["habit_id", 4], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.1ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 4], ["user_id", 4], ["occurred_on", "2026-02-01"], ["created_at", "2026-02-02 17:27:33.216853"], ["updated_at", "2026-02-02 17:27:33.216853"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-31"], ["habit_id", 4], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 4], ["user_id", 4], ["occurred_on", "2026-01-31"], ["created_at", "2026-02-02 17:27:33.223210"], ["updated_at", "2026-02-02 17:27:33.223210"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.7ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 4]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------------
+StreakCalculatorTest: test_calculates_longest_streak_when_all_consecutive
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.231392"], ["updated_at", "2026-02-02 17:27:33.231392"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 5], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.233154"], ["updated_at", "2026-02-02 17:27:33.233154"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 5], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 5], ["user_id", 5], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.239097"], ["updated_at", "2026-02-02 17:27:33.239097"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-01"], ["habit_id", 5], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 5], ["user_id", 5], ["occurred_on", "2026-02-01"], ["created_at", "2026-02-02 17:27:33.242334"], ["updated_at", "2026-02-02 17:27:33.242334"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-31"], ["habit_id", 5], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 5], ["user_id", 5], ["occurred_on", "2026-01-31"], ["created_at", "2026-02-02 17:27:33.245712"], ["updated_at", "2026-02-02 17:27:33.245712"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-30"], ["habit_id", 5], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 5], ["user_id", 5], ["occurred_on", "2026-01-30"], ["created_at", "2026-02-02 17:27:33.247930"], ["updated_at", "2026-02-02 17:27:33.247930"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-29"], ["habit_id", 5], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 5], ["user_id", 5], ["occurred_on", "2026-01-29"], ["created_at", "2026-02-02 17:27:33.249246"], ["updated_at", "2026-02-02 17:27:33.249246"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 5]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+StreakCalculatorTest: test_returns_zero_when_no_checkins_exist
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.253230"], ["updated_at", "2026-02-02 17:27:33.253230"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.7ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 6], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.254764"], ["updated_at", "2026-02-02 17:27:33.254764"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.4ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 6]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------------
+StreakCalculatorTest: test_handles_gaps_in_streak_correctly
+-----------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.261155"], ["updated_at", "2026-02-02 17:27:33.261155"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 7], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.262043"], ["updated_at", "2026-02-02 17:27:33.262043"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 7], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 7], ["user_id", 7], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.264041"], ["updated_at", "2026-02-02 17:27:33.264041"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-01"], ["habit_id", 7], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 7], ["user_id", 7], ["occurred_on", "2026-02-01"], ["created_at", "2026-02-02 17:27:33.265841"], ["updated_at", "2026-02-02 17:27:33.265841"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 7], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 7], ["user_id", 7], ["occurred_on", "2026-01-28"], ["created_at", "2026-02-02 17:27:33.266905"], ["updated_at", "2026-02-02 17:27:33.266905"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 7]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+StreakCalculatorTest: test_handles_timezone_boundary_edge_case
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.270357"], ["updated_at", "2026-02-02 17:27:33.270357"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 8], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.272071"], ["updated_at", "2026-02-02 17:27:33.272071"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "sp@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "SP User"], ["email", "sp@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.274445"], ["updated_at", "2026-02-02 17:27:33.274445"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 9], ["name", "SP Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.275046"], ["updated_at", "2026-02-02 17:27:33.275046"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 9], ["LIMIT", 1]]
+  [1m[36mCheckin Create (1.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 9], ["user_id", 9], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.276410"], ["updated_at", "2026-02-02 17:27:33.276410"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-01"], ["habit_id", 9], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 9], ["user_id", 9], ["occurred_on", "2026-02-01"], ["created_at", "2026-02-02 17:27:33.278549"], ["updated_at", "2026-02-02 17:27:33.278549"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.5ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 9]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------------
+StreakCalculatorTest: test_calculates_longest_streak_correctly
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.282469"], ["updated_at", "2026-02-02 17:27:33.282469"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 10], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-01-03"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.283233"], ["updated_at", "2026-02-02 17:27:33.283233"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-23"], ["habit_id", 10], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 10], ["user_id", 10], ["occurred_on", "2026-01-23"], ["created_at", "2026-02-02 17:27:33.285051"], ["updated_at", "2026-02-02 17:27:33.285051"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-24"], ["habit_id", 10], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 10], ["user_id", 10], ["occurred_on", "2026-01-24"], ["created_at", "2026-02-02 17:27:33.286522"], ["updated_at", "2026-02-02 17:27:33.286522"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-25"], ["habit_id", 10], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 10], ["user_id", 10], ["occurred_on", "2026-01-25"], ["created_at", "2026-02-02 17:27:33.287814"], ["updated_at", "2026-02-02 17:27:33.287814"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-27"], ["habit_id", 10], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 10], ["user_id", 10], ["occurred_on", "2026-01-27"], ["created_at", "2026-02-02 17:27:33.289255"], ["updated_at", "2026-02-02 17:27:33.289255"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-01-28"], ["habit_id", 10], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.2ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 10], ["user_id", 10], ["occurred_on", "2026-01-28"], ["created_at", "2026-02-02 17:27:33.290633"], ["updated_at", "2026-02-02 17:27:33.290633"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Pluck (0.2ms)[0m  [1m[34mSELECT "checkins"."occurred_on" FROM "checkins" WHERE "checkins"."habit_id" = $1 AND (occurred_on <= '2026-02-02')[0m  [["habit_id", 10]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------
+CheckinTest: test_prevents_duplicate_checkins_for_same_habit_and_date
+---------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.294454"], ["updated_at", "2026-02-02 17:27:33.294454"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.8ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 11], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.295672"], ["updated_at", "2026-02-02 17:27:33.295672"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 11], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 11], ["user_id", 11], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.297917"], ["updated_at", "2026-02-02 17:27:33.297917"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 11], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------
+CheckinTest: test_toggle_creates_checkin_when_none_exists
+---------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.302980"], ["updated_at", "2026-02-02 17:27:33.302980"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.6ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 12], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.303905"], ["updated_at", "2026-02-02 17:27:33.303905"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins"[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 12], ["user_id", 12], ["occurred_on", "2026-02-02"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 12], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.4ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 12], ["user_id", 12], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.308985"], ["updated_at", "2026-02-02 17:27:33.308985"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------------------
+CheckinTest: test_allows_checkins_for_same_date_on_different_habits
+-------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.313543"], ["updated_at", "2026-02-02 17:27:33.313543"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 13], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.314654"], ["updated_at", "2026-02-02 17:27:33.314654"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 13], ["name", "Another Habit"], ["goal_per_week", 5], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.315578"], ["updated_at", "2026-02-02 17:27:33.315578"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 13], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 13], ["user_id", 13], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.317299"], ["updated_at", "2026-02-02 17:27:33.317299"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 14], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.3ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 14], ["user_id", 13], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.318953"], ["updated_at", "2026-02-02 17:27:33.318953"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------
+CheckinTest: test_toggle_is_idempotent
+--------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.322253"], ["updated_at", "2026-02-02 17:27:33.322253"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.2ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 14], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.323003"], ["updated_at", "2026-02-02 17:27:33.323003"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Load (0.3ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 15], ["user_id", 14], ["occurred_on", "2026-02-02"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 15], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.5ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 15], ["user_id", 14], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.325411"], ["updated_at", "2026-02-02 17:27:33.325411"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCheckin Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins"[0m
+  [1m[36mCheckin Load (0.5ms)[0m  [1m[34mSELECT "checkins".* FROM "checkins" WHERE "checkins"."habit_id" = $1 AND "checkins"."user_id" = $2 AND "checkins"."occurred_on" = $3 LIMIT $4[0m  [["habit_id", 15], ["user_id", 14], ["occurred_on", "2026-02-02"], ["LIMIT", 1]]
+  [1m[36mCACHE Checkin Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "checkins"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+CheckinTest: test_can_destroy_and_recreate_checkin
+--------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.331159"], ["updated_at", "2026-02-02 17:27:33.331159"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 15], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.332398"], ["updated_at", "2026-02-02 17:27:33.332398"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 16], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.8ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 16], ["user_id", 15], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.333887"], ["updated_at", "2026-02-02 17:27:33.333887"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Destroy (1.2ms)[0m  [1m[31mDELETE FROM "checkins" WHERE "checkins"."id" = $1[0m  [["id", 28]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCheckin Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "checkins" WHERE "checkins"."occurred_on" = $1 AND "checkins"."habit_id" = $2 LIMIT $3[0m  [["occurred_on", "2026-02-02"], ["habit_id", 16], ["LIMIT", 1]]
+  [1m[36mCheckin Create (0.7ms)[0m  [1m[32mINSERT INTO "checkins" ("habit_id", "user_id", "occurred_on", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["habit_id", 16], ["user_id", 15], ["occurred_on", "2026-02-02"], ["created_at", "2026-02-02 17:27:33.338916"], ["updated_at", "2026-02-02 17:27:33.338916"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+ReminderMailerTest: test_reminder
+---------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.345096"], ["updated_at", "2026-02-02 17:27:33.345096"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.3ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 16], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.346072"], ["updated_at", "2026-02-02 17:27:33.346072"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering reminder_mailer/reminder.html.erb within layouts/mailer
+  Rendered reminder_mailer/reminder.html.erb within layouts/mailer (Duration: 1.7ms | Allocations: 541)
+  Rendered layout layouts/mailer.html.erb (Duration: 2.1ms | Allocations: 739)
+  Rendering layout layouts/mailer.text.erb
+  Rendering reminder_mailer/reminder.text.erb within layouts/mailer
+  Rendered reminder_mailer/reminder.text.erb within layouts/mailer (Duration: 0.4ms | Allocations: 284)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.7ms | Allocations: 432)
+ReminderMailer#reminder: processed outbound mail in 6.9ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------
+WeeklySummaryMailerTest: test_summary
+-------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "timezone", "weekly_summary_enabled", "reminders_enabled", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Test User"], ["email", "test@example.com"], ["password_digest", "[FILTERED]"], ["timezone", "America/Sao_Paulo"], ["weekly_summary_enabled", true], ["reminders_enabled", true], ["created_at", "2026-02-02 17:27:33.359918"], ["updated_at", "2026-02-02 17:27:33.359918"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mHabit Create (0.4ms)[0m  [1m[32mINSERT INTO "habits" ("user_id", "name", "goal_per_week", "start_date", "archived_at", "color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 17], ["name", "Test Habit"], ["goal_per_week", 7], ["start_date", "2026-02-02"], ["archived_at", nil], ["color", nil], ["created_at", "2026-02-02 17:27:33.361298"], ["updated_at", "2026-02-02 17:27:33.361298"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering weekly_summary_mailer/summary.html.erb within layouts/mailer
+  Rendered weekly_summary_mailer/summary.html.erb within layouts/mailer (Duration: 0.9ms | Allocations: 515)
+  Rendered layout layouts/mailer.html.erb (Duration: 1.0ms | Allocations: 571)
+  Rendering layout layouts/mailer.text.erb
+  Rendering weekly_summary_mailer/summary.text.erb within layouts/mailer
+  Rendered weekly_summary_mailer/summary.text.erb within layouts/mailer (Duration: 0.5ms | Allocations: 398)
+  Rendered layout layouts/mailer.text.erb (Duration: 0.6ms | Allocations: 446)
+WeeklySummaryMailer#summary: processed outbound mail in 3.9ms
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m

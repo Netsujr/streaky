@@ -1,7 +1,7 @@
 class ApplicationJob < ActiveJob::Base
-  # Automatically retry jobs that encountered a deadlock
+  # optional: retry when we hit a deadlock (https://api.rubyonrails.org/classes/ActiveJob/Exceptions/ClassMethods.html#method-i-retry_on)
   # retry_on ActiveRecord::Deadlocked
 
-  # Most jobs are safe to ignore if the underlying records are no longer available
+  # optional: discard when the record's gone so we dont keep retrying
   # discard_on ActiveJob::DeserializationError
 end
