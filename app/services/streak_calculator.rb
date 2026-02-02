@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Facade for streak and completion metrics. Delegates to single-responsibility components.
-# See: StreakCalculator::CheckedInDates, CurrentStreak, LongestStreak, CompletionRate.
+# Facade for streak metrics. Delegates to single-responsibility components.
+# See: StreakCalculator::CheckedInDates, CurrentStreak, LongestStreak.
 class StreakCalculator
   attr_reader :habit, :reference_date, :user_timezone
 
@@ -25,10 +25,6 @@ class StreakCalculator
 
   def checked_in_dates
     date_loader.all
-  end
-
-  def completion_rate_last_7_days
-    CompletionRate.call(habit, checked_in_dates_set(last_n_days: 7), reference_date, last_n_days: 7)
   end
 
   private

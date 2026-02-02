@@ -111,14 +111,4 @@ class StreakCalculatorTest < ActiveSupport::TestCase
     assert_equal 2, calculator.current_streak_days
   end
 
-  test "completion rate calculation for last 7 days" do
-    today = Date.today
-    3.times do |i|
-      Checkin.create!(habit: @habit, user: @user, occurred_on: today - i.days)
-    end
-
-    calculator = StreakCalculator.new(@habit)
-    rate = calculator.completion_rate_last_7_days
-    assert_in_delta 42.9, rate, 1.0
-  end
 end

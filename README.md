@@ -41,6 +41,18 @@ A production-quality Ruby on Rails habit tracker app showcasing Rails + Hotwire 
    rails db:seed
    ```
 
+   **Seeds** create 5 test accounts, each with 5–10 habits and check-in history so you can test dashboard, streaks, archive, and Turbo Streams. All accounts use the same password: `password123`. Seeds are idempotent (safe to run again).
+
+   | Email | Name | Habits |
+   |-------|------|--------|
+   | `demo@streaky.app` | Demo User | 10 |
+   | `alex@streaky.app` | Alex Rivera | 5–10 |
+   | `sam@streaky.app` | Sam Chen | 5–10 |
+   | `jordan@streaky.app` | Jordan Lee | 5–10 |
+   | `casey@streaky.app` | Casey Taylor | 5–10 |
+
+   To re-run seeds (e.g. after resetting the DB): `rails db:seed`
+
 4. **Start the server**:
    ```bash
    rails server
@@ -53,9 +65,9 @@ A production-quality Ruby on Rails habit tracker app showcasing Rails + Hotwire 
 
 5. **Access the app**:
    - Visit http://localhost:3000
-   - Sign in with demo credentials:
-     - Email: `demo@streaky.app`
-     - Password: `password123`
+   - Sign in with any seed account (password for all: `password123`):
+     - `demo@streaky.app` (10 habits, good for testing full dashboard)
+     - `alex@streaky.app`, `sam@streaky.app`, `jordan@streaky.app`, `casey@streaky.app`
 
 ## Running Jobs Locally
 
@@ -105,11 +117,15 @@ rails jobs:weekly_summary
    git push heroku main
    ```
 
-5. **Run migrations and seed**:
+5. **Migrations and seeds in production**
+   The `Procfile` includes a **release** phase that runs `db:migrate` and `db:seed` on each deploy (Heroku and other platforms that support release commands). So seed data is loaded automatically when you deploy.
+   Seeds are **idempotent**: running them again won’t duplicate users (same emails) or habits (same name per user).
+   To run migrations and seeds manually instead (e.g. if your host doesn’t use the release phase):
    ```bash
    heroku run rails db:migrate
    heroku run rails db:seed
    ```
+   **Render**: In your Web Service, set **Release Command** to: `rails db:migrate && rails db:seed` so migrations and seeds run on every deploy.
 
 6. **Start worker dyno** (required for background jobs):
    ```bash
@@ -137,7 +153,7 @@ rails jobs:weekly_summary
    - Use demo credentials: `demo@streaky.app` / `password123`
 
 2. **View Dashboard**:
-   - See 3 pre-seeded habits with streak stats
+   - See pre-seeded habits (demo@streaky.app has 10) with streak stats
    - View 7-day grid for each habit
 
 3. **Toggle Check-in**:

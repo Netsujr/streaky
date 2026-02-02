@@ -1,0 +1,7 @@
+<div id="habit-calendar-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" data-controller="habit-calendar" data-action="click->habit-calendar#close">
+  <div class="bg-white rounded-xl shadow-2xl border border-gray-200/50 w-max max-w-[340px] sm:max-w-[380px] overflow-hidden flex flex-col shrink-0" data-habit-calendar-target="panel" data-action="click->habit-calendar#ignore">
+    <%= turbo_frame_tag "habit_calendar", data: { habit_calendar_target: "frame" }, class: "overflow-y-auto" do %>
+      <div class="p-6 text-center text-gray-500 text-sm">Loading…</div>
+    <% end %>
+  </div>
+</div>

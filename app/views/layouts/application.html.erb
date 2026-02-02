@@ -11,7 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+  <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen" data-controller="flash-toast">
     <% if current_user %>
       <%= render "layouts/nav" %>
     <% end %>
@@ -24,6 +24,7 @@
 
     <%= render "shared/confirmation_modal" %>
     <%= render "habits/form_modal" %>
+    <%= render "habits/calendar_modal" %>
 
     <%= render "layouts/mobile_menu_script" %>
   </body>

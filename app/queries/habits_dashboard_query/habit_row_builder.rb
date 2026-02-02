@@ -19,7 +19,6 @@ class HabitsDashboardQuery
         habit: habit,
         current_streak_days: calculator.current_streak_days,
         longest_streak_days: calculator.longest_streak_days,
-        completion_rate_last_7_days: calculator.completion_rate_last_7_days,
         checked_in_dates: checked_in_dates_set
       }
     end
