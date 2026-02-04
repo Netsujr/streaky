@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Facade for streak metrics. Delegates to single-responsibility components.
-# See: StreakCalculator::CheckedInDates, CurrentStreak, LongestStreak.
+# facade for streak metrics - current streak, longest streak, and which dates were checked in.
+# all date math uses user timezone. delegates to CheckedInDates, CurrentStreak, LongestStreak.
 class StreakCalculator
   attr_reader :habit, :reference_date, :user_timezone
 

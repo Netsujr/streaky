@@ -1,3 +1,4 @@
+# user's habit - name, goal per week, start date, optional color. can be archived (archived_at set).
 class Habit < ApplicationRecord
   belongs_to :user
   has_many :checkins, dependent: :destroy

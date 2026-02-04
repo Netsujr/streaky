@@ -1,3 +1,4 @@
+# sign up - new user form and create. uses auth layout, no login required for these actions (skip auth)
 class RegistrationsController < ApplicationController
   layout "authentication"
   skip_before_action :require_authentication, only: [:new, :create]

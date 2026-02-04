@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Checkins
-  # Toggles a check-in for a habit on a given date: creates or destroys.
-  # Returns { checkin:, action: :created | :destroyed }.
+  # toggles checkin on/off for a habit on a given date (create or destroy). returns { checkin:, action: :created or :destroyed }.
+  # handles race condition where two toggles hit at once (duplicate occurred_on) by retrying destroy + create.
   class ToggleService
     def self.call(habit:, user:, date:)
       new(habit: habit, user: user, date: date).call

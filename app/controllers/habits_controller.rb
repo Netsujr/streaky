@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# crud for habits, plus archive. show is the single habit page (read only for streaks/days, no toggling there)
 class HabitsController < ApplicationController
   include HabitLoading
 
-  before_action :set_habit, only: [:show, :edit, :update, :destroy, :archive, :calendar]
+  before_action :set_habit, only: [:show, :edit, :update, :destroy, :archive]
 
   def index
     @habits = current_user.habits.active.order(created_at: :desc)
@@ -59,22 +60,6 @@ class HabitsController < ApplicationController
     result = Habits::ArchiveService.call(@habit)
     redirect_path = result[:archived] ? (request.referer || root_path) : habits_path
     redirect_to redirect_path, notice: result[:notice]
-  end
-
-  def calendar
-    today = Time.use_zone(current_user.timezone) { Time.zone.today }
-    @month = begin
-      params[:month].present? ? Date.parse(params[:month]) : today
-    rescue ArgumentError
-      today
-    end
-    @month = @month.beginning_of_month
-    @checked_dates = @habit.checkins.pluck(:occurred_on).to_set
-    respond_to do |format|
-      # full layout so Turbo Frame requests get styled document; Turbo extracts the frame
-      format.html { render :calendar }
-      format.turbo_stream
-    end
   end
 
   private

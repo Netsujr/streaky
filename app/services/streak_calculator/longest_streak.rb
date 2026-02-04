@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StreakCalculator
-  # Finds longest run of consecutive dates in a set. One job: longest streak length.
+  # finds the longest run of consecutive dates in the set (all time best streak).
   class LongestStreak
     def self.call(dates_set)
       new(dates_set).call

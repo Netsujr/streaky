@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   resources :habits do
     member do
-      get :calendar
       patch :archive
     end
     collection do

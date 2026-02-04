@@ -1,3 +1,4 @@
+# daily reminder email - list of habits user hasnt checked in today (called from ReminderJob)
 class ReminderMailer < ApplicationMailer
   def reminder(user, habits)
     @user = user

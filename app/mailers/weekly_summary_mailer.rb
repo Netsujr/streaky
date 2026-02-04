@@ -1,3 +1,4 @@
+# weekly summary email - last weeks stats per habit, streaks and at-risk (called from WeeklySummaryJob)
 class WeeklySummaryMailer < ApplicationMailer
   def summary(user, summary_data)
     @user = user

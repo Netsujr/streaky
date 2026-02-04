@@ -1,3 +1,4 @@
+# one checkin = user checked in for a habit on a given date. unique per habit + occurred_on.
 class Checkin < ApplicationRecord
   belongs_to :habit
   belongs_to :user

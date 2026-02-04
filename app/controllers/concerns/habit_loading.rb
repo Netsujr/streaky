@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# loads @habit for current user and permits habit paramaters for create/update
 module HabitLoading
   extend ActiveSupport::Concern
 

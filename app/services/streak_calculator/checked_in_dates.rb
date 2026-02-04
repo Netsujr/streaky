@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StreakCalculator
-  # Loads check-in dates for a habit from the DB. Single responsibility: date set access.
+  # loads checkin dates for a habit from the db, scoped to reference date / timezone. used by current/longest streak.
   class CheckedInDates
     def initialize(habit, reference_date:, user_timezone:)
       @habit = habit

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# shared auth helpers - current_user from session, require login or redirect to sign in,
+# skip auth (redirect to root if already logged in, for login/signup pages)
 module Authentication
   extend ActiveSupport::Concern
 

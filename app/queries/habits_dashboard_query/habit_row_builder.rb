@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HabitsDashboardQuery
-  # Builds the stats hash for a single habit. One job: one row of dashboard data.
+  # builds one habit row for the dashboard: habit, current/longest streak, and the set of dates they checked in (for last 7 days ui).
   class HabitRowBuilder
     def self.call(habit, reference_date:, user_timezone:, checkins_for_habit:)
       new(habit, reference_date: reference_date, user_timezone: user_timezone, checkins_for_habit: checkins_for_habit).call

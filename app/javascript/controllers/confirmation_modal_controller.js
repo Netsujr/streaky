@@ -38,12 +38,6 @@ export default class extends Controller {
     const url = trigger.dataset.url || trigger.getAttribute("data-url") || trigger.href || this.confirmUrlValue
     const method = trigger.dataset.method || trigger.getAttribute("data-method") || trigger.dataset.turboMethod || trigger.getAttribute("data-turbo-method") || this.confirmMethodValue || "get"
 
-    // debug logging (can remove in prod)
-    console.log("Modal show triggered:", { title, message, url, method })
-    console.log("Trigger element dataset:", trigger.dataset)
-    console.log("Trigger href:", trigger.href)
-    console.log("All data attributes:", Array.from(trigger.attributes).filter(attr => attr.name.startsWith("data-")))
-
     // Validate URL
     if (!url || url === "#" || url === window.location.href + "#") {
       console.error("Invalid URL:", url)
@@ -62,8 +56,6 @@ export default class extends Controller {
     // store url/method on the modal itself so when confirm btn is clicked we can read it (trigger and modal have diff controller instances)
     modalElement.setAttribute("data-confirm-url", url)
     modalElement.setAttribute("data-confirm-method", method)
-    console.log("Stored action data on modal:", { url, method })
-    console.log("Modal dataset after storage:", modalElement.dataset)
 
     // update the title and message text in the modal
     const titleTarget = modalElement.querySelector('[data-confirmation-modal-target="title"]')
@@ -77,11 +69,7 @@ export default class extends Controller {
     }
 
     // show modal and lock body scroll
-    console.log("Modal element before show:", modalElement)
-    console.log("Modal has 'hidden' class:", modalElement.classList.contains("hidden"))
     modalElement.classList.remove("hidden")
-    console.log("Modal has 'hidden' class after remove:", modalElement.classList.contains("hidden"))
-    console.log("Modal computed display:", window.getComputedStyle(modalElement).display)
     document.body.style.overflow = "hidden" // Prevent background scrolling
 
     // focus confirm button for accessability (keyboard users)
@@ -120,13 +108,8 @@ export default class extends Controller {
       return
     }
 
-    console.log("Modal element dataset:", modalElement.dataset)
-    console.log("Modal element attributes:", Array.from(modalElement.attributes).filter(attr => attr.name.startsWith("data-confirm")))
-
     const url = modalElement.dataset.confirmUrl || modalElement.getAttribute("data-confirm-url")
     const method = modalElement.dataset.confirmMethod || modalElement.getAttribute("data-confirm-method") || "get"
-
-    console.log("Retrieved from modal:", { url, method })
 
     if (!url) {
       console.error("No confirm action stored on modal element")
@@ -135,8 +118,6 @@ export default class extends Controller {
       this.hide()
       return
     }
-
-    console.log("Confirming action:", { url, method })
 
     // double check url before we submit
     if (!url || url === "#" || url === window.location.href + "#") {
@@ -173,26 +154,16 @@ export default class extends Controller {
 
     // add _method for patch/delete (rails convention)
     const methodValue = method ? method.toLowerCase() : "get"
-    console.log("Method value:", methodValue)
     if (methodValue !== "get" && methodValue !== "post") {
       const methodInput = document.createElement("input")
       methodInput.type = "hidden"
       methodInput.name = "_method"
       methodInput.value = methodValue
       form.appendChild(methodInput)
-      console.log("Added method override:", methodValue)
     }
 
     // append to body then submit (form has to be in dom)
     document.body.appendChild(form)
-
-    // log right before submit for debugging
-    console.log("Submitting form:", {
-      action: form.action,
-      method: form.method,
-      hasMethodOverride: form.querySelector('input[name="_method"]') !== null,
-      methodOverrideValue: form.querySelector('input[name="_method"]')?.value
-    })
 
     // submit - full page reload, server sends redirect
     form.submit()

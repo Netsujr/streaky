@@ -1,3 +1,4 @@
+# user account - name, email, timezone, password. has prefs for weekly summary and reminders (both default true).
 class User < ApplicationRecord
   has_secure_password
 

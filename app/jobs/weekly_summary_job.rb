@@ -1,3 +1,5 @@
+# runs weekly on mondays (cron). for each user with weekly summary on, builds last weeks
+# stats per habit (streaks, checkin count, at-risk) and sends one summary email.
 class WeeklySummaryJob < ApplicationJob
   queue_as :default
 

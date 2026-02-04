@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StreakCalculator
-  # Counts consecutive days going backward from reference_date. One job: current streak length.
+  # counts consecutive days going backward from reference_date (e.g. today). thats the "current streak".
   class CurrentStreak
     def self.call(dates_set, reference_date)
       new(dates_set, reference_date).call

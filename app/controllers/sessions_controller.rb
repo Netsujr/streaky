@@ -1,3 +1,4 @@
+# sign in / sign out. login form and create session, destroy clears session
 class SessionsController < ApplicationController
   layout "authentication"
   skip_before_action :require_authentication, only: [:new, :create]

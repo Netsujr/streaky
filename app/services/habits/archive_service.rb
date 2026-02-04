@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Habits
-  # Archives or restores a habit. Returns { archived: true|false, notice: String }.
-  # Controller chooses redirect path based on :archived.
+  # archives or restores a habit (sets archived_at). returns { archived: true/false, notice: string } so controller can redirect.
   class ArchiveService
     def self.call(habit)
       new(habit).call

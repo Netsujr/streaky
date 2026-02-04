@@ -1,3 +1,4 @@
+# user settings page - timezone and email prefs (weekly summary, reminders). update saves and redirects
 class SettingsController < ApplicationController
   def show
     @user = current_user

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Builds dashboard data for the habits index: habits with stats, completion count, week range.
-# Delegates per-habit row building to HabitsDashboardQuery::HabitRowBuilder.
+# builds the main dashboard payload: list of habits with streak/checkin stats, week range, today completion count.
+# one query for habits + checkins, then habit row builder per habit so we dont n+1.
 class HabitsDashboardQuery
   attr_reader :user, :today_date
 

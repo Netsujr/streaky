@@ -1,3 +1,5 @@
+# runs daily (cron). for each user with reminders on, finds habits they didnt check in today
+# and sends one reminder email listing those habits.
 class ReminderJob < ApplicationJob
   queue_as :default
 

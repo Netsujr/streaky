@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# handels toggling a checkin on/off for a given date, returns turbo stream to updat the ui
 class CheckinsController < ApplicationController
   before_action :set_habit
 
